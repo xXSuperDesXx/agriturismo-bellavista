@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriturismo Bellavista | Relax e Natura</title>
+    <meta name="description" content="Un'oasi di pace immersa nelle colline toscane. Agriturismo Bellavista offre appartamenti, cucina tipica e attività all'aperto.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Configurazione Tailwind Personalizzata -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'olive': '#556b2f',
+                        'olive-dark': '#3b4d1e',
+                        'cream': '#fdfbf7',
+                        'terra': '#cca43b',
+                        'stone-custom': '#f5f5f0'
+                    },
+                    fontFamily: {
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'sans': ['"Lato"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'hero-pattern': "url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')",
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles & Animations */
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+        }
+        
+        /* Animazioni SVG */
+        .activity-card:hover .svg-icon {
+            transform: scale(1.1);
+            stroke: #cca43b;
+        }
+        
+        .activity-card:hover .svg-path-draw {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 0;
+            animation: draw 1.5s ease-in-out forwards;
+        }
+
+        @keyframes draw {
+            from { stroke-dashoffset: 100; }
+            to { stroke-dashoffset: 0; }
+        }
+
+        /* Star Animation for Reviews */
+        @keyframes star-pop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .group:hover .star-anim {
+            animation: star-pop 0.4s ease-out forwards;
+        }
+        
+        /* Stagger delays for stars */
+        .star-anim:nth-child(1) { animation-delay: 0.05s; }
+        .star-anim:nth-child(2) { animation-delay: 0.1s; }
+        .star-anim:nth-child(3) { animation-delay: 0.15s; }
+        .star-anim:nth-child(4) { animation-delay: 0.2s; }
+        .star-anim:nth-child(5) { animation-delay: 0.25s; }
+
+        .mobile-menu-enter {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu-active {
+            transform: translateX(0);
+        }
+
+        /* Navbar Scroll Effect */
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        header.scrolled .nav-link {
+            color: #3b4d1e;
+        }
+        /* Override for active state in scrolled header */
+        header.scrolled .nav-link.text-terra {
+            color: #cca43b !important;
+        }
+        header.scrolled .logo-text {
+            color: #556b2f;
+        }
+        header.scrolled .globe-icon {
+            color: #3b4d1e;
+        }
+        
+        /* Language Switcher Styles */
+        .lang-btn {
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .lang-btn:hover, .lang-btn.active {
+            opacity: 1;
+            font-weight: bold;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        /* Modal Animation */
+        .modal-bg {
+            background-color: rgba(0,0,0,0.6);
+        }
+
+        /* Hide/Show Logic classes */
+        .view-hidden {
+            display: none !important;
+        }
+        .view-visible {
+            display: block !important;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Lightbox specific styles */
+        .lightbox-overlay {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        /* --- Scroll Reveal Animations --- */
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        
+        .reveal-item.reveal-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered effects for grid */
+        .reveal-item:nth-child(odd) {
+            transform: translateY(50px) translateX(-20px);
+        }
+        .reveal-item:nth-child(even) {
+            transform: translateY(50px) translateX(20px);
+        }
+        
+        .reveal-item.reveal-visible:nth-child(odd),
+        .reveal-item.reveal-visible:nth-child(even) {
+            transform: translateY(0) translateX(0);
+        }
+        
+        /* Checkbox Custom Style for Activity Form */
+        .checkbox-wrapper input:checked + div {
+            background-color: #556b2f;
+            border-color: #556b2f;
+        }
+        .checkbox-wrapper input:checked + div svg {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-cream text-gray-700 font-sans antialiased">
+
+    <!-- HEADER -->
+    <header id="main-header" class="fixed w-full z-50 transition-all duration-300 py-6 text-white top-0 left-0">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="javascript:showMain()" class="logo-text text-2xl md:text-3xl lg:text-4xl font-serif font-bold tracking-wider uppercase z-50 relative transition-colors">
+                Bellavista
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex items-center gap-8">
+                <nav class="flex space-x-8 items-center">
+                    <a href="javascript:showMainAndScroll('home')" data-target="home" data-i18n="nav_home" class="desktop-nav-link nav-link hover:text-terra transition-colors uppercase text-sm tracking-widest font-semibold text-terra">Home</a>
+                    <a href="javascript:showMainAndScroll('chi-siamo')" data-target="chi-siamo" data-i18n="nav_about" class="desktop-nav-link nav-link hover:text-terra transition-colors uppercase text-sm tracking-widest font-semibold">Chi Siamo</a>
+                    <a href="javascript:showMainAndScroll('attivita')" id="nav-attivita" data-target="attivita" data-i18n="nav_activities" class="desktop-nav-link nav-link hover:text-terra transition-colors uppercase text-sm tracking-widest font-semibold">Attività</a>
+                    <a href="javascript:showMainAndScroll('appartamenti')" data-target="appartamenti" data-i18n="nav_apartments" class="desktop-nav-link nav-link hover:text-terra transition-colors uppercase text-sm tracking-widest font-semibold">Appartamenti</a>
+                    <a href="javascript:showMainAndScroll('dove-siamo')" data-target="dove-siamo" data-i18n="nav_location" class="desktop-nav-link nav-link hover:text-terra transition-colors uppercase text-sm tracking-widest font-semibold">Dove Siamo</a>
+                    <a href="javascript:showGallery()" id="nav-gallery" data-i18n="nav_gallery" class="desktop-nav-link nav-link hover:text-terra transition-colors uppercase text-sm tracking-widest font-semibold">Galleria</a>
+                </nav>
+                
+                <!-- Language Switcher Desktop (Dropdown with Globe) -->
+                <div class="relative ml-4 border-l border-current pl-6">
+                    <button onclick="toggleDesktopLangMenu()" id="desktop-lang-trigger" class="flex items-center gap-1 nav-link hover:text-terra transition-colors focus:outline-none">
+                        <!-- Globe Icon -->
+                        <svg class="w-5 h-5 globe-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span id="desktop-current-lang" class="text-xs font-bold uppercase tracking-wider">IT</span>
+                        <svg class="w-3 h-3 ml-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    
+                    <!-- Desktop Dropdown Options -->
+                    <div id="desktop-lang-options" class="hidden absolute top-full right-0 mt-2 bg-white shadow-lg rounded-sm py-2 w-24 flex flex-col items-center z-50 text-gray-700 border border-gray-100">
+                        <button onclick="changeLanguage('it')" class="w-full py-1 hover:bg-cream hover:text-olive font-bold text-xs transition-colors">IT</button>
+                        <button onclick="changeLanguage('en')" class="w-full py-1 hover:bg-cream hover:text-olive font-bold text-xs transition-colors">EN</button>
+                        <button onclick="changeLanguage('de')" class="w-full py-1 hover:bg-cream hover:text-olive font-bold text-xs transition-colors">DE</button>
+                        <button onclick="changeLanguage('es')" class="w-full py-1 hover:bg-cream hover:text-olive font-bold text-xs transition-colors">ES</button>
+                        <button onclick="changeLanguage('fr')" class="w-full py-1 hover:bg-cream hover:text-olive font-bold text-xs transition-colors">FR</button>
+                    </div>
+                </div>
+
+                <a href="https://my.xenion.it/bellavista/paginaprenotazione?idstructure=1&lang=it" target="_blank" id="btn-book-desktop" data-i18n="nav_book" class="px-6 py-2 bg-olive hover:bg-olive-dark text-white rounded transition-colors uppercase text-xs tracking-widest font-bold ml-2">Prenota</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="lg:hidden z-50 focus:outline-none text-current nav-link">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white z-40 mobile-menu-enter flex flex-col justify-center items-center space-y-6 lg:hidden">
+        
+        <!-- Language Switcher Mobile (Original List Style) -->
+        <div class="flex items-center gap-4 text-sm font-bold uppercase tracking-wider text-olive mb-4">
+            <button onclick="changeLanguage('it')" class="lang-btn active" data-lang="it">IT</button>
+            <button onclick="changeLanguage('en')" class="lang-btn" data-lang="en">EN</button>
+            <button onclick="changeLanguage('de')" class="lang-btn" data-lang="de">DE</button>
+            <button onclick="changeLanguage('es')" class="lang-btn" data-lang="es">ES</button>
+            <button onclick="changeLanguage('fr')" class="lang-btn" data-lang="fr">FR</button>
+        </div>
+
+        <a href="javascript:showMainAndScroll('home')" data-i18n="nav_home" class="text-2xl font-serif text-olive hover:text-terra mobile-link">Home</a>
+        <a href="javascript:showMainAndScroll('chi-siamo')" data-i18n="nav_about" class="text-2xl font-serif text-olive hover:text-terra mobile-link">Chi Siamo</a>
+        <a href="javascript:showMainAndScroll('attivita')" data-i18n="nav_activities" class="text-3xl font-serif text-terra font-bold mobile-link">Attività</a>
+        <a href="javascript:showMainAndScroll('appartamenti')" data-i18n="nav_apartments" class="text-2xl font-serif text-olive hover:text-terra mobile-link">Appartamenti</a>
+        <a href="javascript:showMainAndScroll('dove-siamo')" data-i18n="nav_location" class="text-2xl font-serif text-olive hover:text-terra mobile-link">Dove Siamo</a>
+        <a href="javascript:showGallery()" data-i18n="nav_gallery" class="text-2xl font-serif text-olive hover:text-terra mobile-link">Galleria</a>
+        <a href="javascript:showMainAndScroll('contatti')" data-i18n="nav_contacts" class="text-2xl font-serif text-olive hover:text-terra mobile-link">Contatti</a>
+        
+        <a href="https://my.xenion.it/bellavista/paginaprenotazione?idstructure=1&lang=it" target="_blank" id="btn-book-mobile" data-i18n="nav_book" class="mt-4 px-8 py-3 bg-olive text-white rounded uppercase text-sm font-bold tracking-widest">Prenota</a>
+    </div>
+
+    <!-- ================= MAIN PAGE VIEW ================= -->
+    <main id="main-view" class="view-visible">
+        
+        <!-- HERO SECTION (Target: home) -->
+        <section id="home" class="relative h-screen bg-gray-700 bg-hero-pattern bg-cover bg-center bg-fixed bg-no-repeat flex items-center justify-center">
+            <div class="absolute inset-0 hero-overlay bg-black/30"></div>
+            <div class="relative z-10 text-center px-6 max-w-4xl mx-auto">
+                <span class="block text-terra text-lg md:text-xl lg:text-2xl tracking-[0.3em] uppercase mb-4 font-bold animate-fade-in-up" data-i18n="hero_welcome">Benvenuti in Toscana</span>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-8 leading-tight drop-shadow-lg">
+                    Agriturismo <br> <span class="italic">Bellavista</span>
+                </h1>
+                <p class="text-white/90 text-lg md:text-xl lg:text-2xl mb-10 max-w-2xl mx-auto font-light" data-i18n="hero_desc">
+                    Dove la natura incontra l'eleganza. Riscopri il tempo lento tra oliveti e dolci colline Toscane.
+                </p>
+                <a href="#appartamenti" class="inline-block px-10 py-4 border-2 border-white text-white hover:bg-white hover:text-olive transition-all duration-300 uppercase tracking-widest text-sm lg:text-base font-bold" data-i18n="hero_cta">
+                    Scopri le Dimore
+                </a>
+            </div>
+            
+            <!-- Scroll Down Indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- INTRO SECTION (Target: chi-siamo) -->
+        <section id="chi-siamo" class="py-20 md:py-32 bg-cream">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2">
+                        <div class="relative">
+                            <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-terra"></div>
+                            <img src="https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/phoca_thumb_l_DSCN4426_thumb.jpg" alt="Casale toscano" class="w-full h-auto min-h-[300px] bg-gray-200 shadow-2xl rounded-sm object-cover">
+                            <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-terra"></div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 text-center md:text-left">
+                        <span class="text-olive text-sm lg:text-base tracking-widest uppercase font-bold" data-i18n="intro_subtitle">La Nostra Storia</span>
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif text-olive-dark mt-4 mb-6" data-i18n="intro_title">Un rifugio per l'anima</h2>
+                        <p class="text-gray-600 leading-relaxed mb-6 text-lg lg:text-xl" data-i18n="intro_p1">
+                            Immerso nel cuore verde della Toscana, Agriturismo Bellavista nasce dal restauro conservativo di un antico casale del 1700. Qui, il silenzio è rotto solo dal canto delle cicale e dal fruscio del vento tra gli ulivi.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed mb-8 text-base lg:text-lg" data-i18n="intro_p2">
+                            Offriamo un'esperienza autentica, dove la tradizione contadina si sposa con il comfort moderno. Che siate alla ricerca di una fuga romantica o di una vacanza in famiglia, troverete qui la vostra seconda casa.
+                        </p>
+                         <div class="font-serif text-3xl text-olive opacity-80 italic">Agriturismo Bellavista</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ATTIVITÀ SECTION (Target: attivita) -->
+        <section id="attivita" class="py-24 bg-white relative overflow-hidden">
+            <!-- Decorative Background -->
+            <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                    <pattern id="leaf-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                        <path d="M20 20 Q30 5 40 20 T60 20" stroke="#556b2f" fill="none"/>
+                    </pattern>
+                    <rect width="100%" height="100%" fill="url(#leaf-pattern)"/>
+                </svg>
+            </div>
+
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-terra text-sm lg:text-base tracking-widest uppercase font-bold" data-i18n="act_subtitle">Esperienze Uniche</span>
+                    <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif text-olive-dark mt-4" data-i18n="act_title">Le Nostre Attività</h2>
+                    <p class="text-gray-500 mt-4 text-lg lg:text-xl" data-i18n="act_desc">Abbiamo curato per voi una selezione di esperienze per vivere appieno il territorio.</p>
+                </div>
+
+                <!-- Modificato grid-cols per accomodare 4 elementi (md:2, lg:4) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10" id="home-activities-grid">
+                    <!-- Activities injected via JS for translation support -->
+                </div>
+                
+                <div class="text-center mt-12">
+                    <a href="javascript:showActivities()" class="inline-block border-b border-olive text-olive hover:text-terra transition-colors uppercase text-sm lg:text-base tracking-widest font-bold pb-1" data-i18n="act_cta">Prenota un'esperienza</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- APPARTAMENTI SECTION (Target: appartamenti) -->
+        <section id="appartamenti" class="py-20 bg-stone-custom">
+            <div class="container mx-auto px-6">
+                <div class="flex justify-between items-end mb-12">
+                    <div>
+                        <span class="text-terra text-sm lg:text-base tracking-widest uppercase font-bold" data-i18n="apt_subtitle">Soggiorno</span>
+                        <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif text-olive-dark mt-2" data-i18n="apt_title">Le Nostre Dimore</h2>
+                    </div>
+                    <!-- CHANGED: Link to new gallery view -->
+                    <a href="javascript:showGallery()" class="hidden md:inline-block text-gray-500 hover:text-olive transition-colors text-sm lg:text-base uppercase tracking-wider cursor-pointer" data-i18n="apt_view_all">Vedi tutti →</a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="apartments-grid">
+                    <!-- Apartments injected via JS -->
+                </div>
+                
+                <div class="text-center mt-12">
+                    <!-- CHANGED: Link to new gallery view -->
+                    <a href="javascript:showGallery()" class="inline-block border-b border-olive text-olive hover:text-terra transition-colors uppercase text-sm lg:text-base tracking-widest font-bold pb-1 cursor-pointer" data-i18n="apt_view_all_btn">Vedi tutti gli appartamenti</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- NUOVA SEZIONE RECENSIONI -->
+        <section id="recensioni" class="py-16 bg-cream border-t border-gray-200 relative">
+            <!-- Decorative dots -->
+            <div class="absolute top-10 left-10 w-20 h-20 bg-terra/10 rounded-full blur-2xl"></div>
+            <div class="absolute bottom-10 right-10 w-32 h-32 bg-olive/10 rounded-full blur-2xl"></div>
+
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <span class="text-terra text-sm lg:text-base tracking-widest uppercase font-bold" data-i18n="rev_subtitle">COSA DICONO DI NOI</span>
+                <h2 class="text-3xl lg:text-5xl font-serif text-olive-dark mt-4 mb-12" data-i18n="rev_title">L'Eccellenza Riconosciuta</h2>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    
+                    <!-- Google -->
+                    <div class="group bg-white p-6 rounded-sm shadow-md hover:shadow-xl transition-all duration-300 border-b-4 border-blue-500 cursor-default">
+                        <div class="h-12 mb-4 flex items-center justify-center text-blue-500">
+                            <!-- Text Logo Style -->
+                            <span class="font-bold text-2xl font-sans tracking-tighter">Google</span>
+                        </div>
+                        <div class="flex justify-center gap-1 text-terra mb-2">
+                            <span class="star-anim text-xl">★</span><span class="star-anim text-xl">★</span><span class="star-anim text-xl">★</span><span class="star-anim text-xl">★</span><span class="star-anim text-xl">★</span>
+                        </div>
+                        <p class="font-bold text-gray-700">4.8 / 5.0</p>
+                        <p class="text-xs text-gray-400 mt-1">Google Reviews</p>
+                    </div>
+
+                    <!-- TripAdvisor -->
+                    <div class="group bg-white p-6 rounded-sm shadow-md hover:shadow-xl transition-all duration-300 border-b-4 border-green-500 cursor-default">
+                        <div class="h-12 mb-4 flex items-center justify-center text-green-600">
+                            <!-- Text Logo Style -->
+                            <span class="font-bold text-2xl font-sans tracking-tighter">TripAdvisor</span>
+                        </div>
+                        <div class="flex justify-center gap-1 text-green-500 mb-2">
+                            <!-- Circles for Tripadvisor style -->
+                            <span class="star-anim text-xl">●</span><span class="star-anim text-xl">●</span><span class="star-anim text-xl">●</span><span class="star-anim text-xl">●</span><span class="star-anim text-xl">●</span>
+                        </div>
+                        <p class="font-bold text-gray-700">4.8 / 5.0</p>
+                        <p class="text-xs text-gray-400 mt-1" data-i18n="rev_excellent">Eccellente</p>
+                    </div>
+
+                    <!-- Booking.com -->
+                    <div class="group bg-white p-6 rounded-sm shadow-md hover:shadow-xl transition-all duration-300 border-b-4 border-blue-900 cursor-default">
+                        <div class="h-12 mb-4 flex items-center justify-center text-blue-900">
+                            <!-- Text Logo Style -->
+                            <span class="font-bold text-2xl font-sans tracking-tighter">Booking.com</span>
+                        </div>
+                        <div class="flex justify-center gap-1 text-terra mb-2">
+                            <span class="star-anim text-xl">★</span><span class="star-anim text-xl">★</span><span class="star-anim text-xl">★</span><span class="star-anim text-xl">★</span><span class="star-anim text-xl">★</span>
+                        </div>
+                        <p class="font-bold text-gray-700">9.5 / 10</p>
+                        <p class="text-xs text-gray-400 mt-1" data-i18n="rev_exceptional">Eccezionale</p>
+                    </div>
+
+                    <!-- Airbnb -->
+                    <div class="group bg-white p-6 rounded-sm shadow-md hover:shadow-xl transition-all duration-300 border-b-4 border-red-500 cursor-default">
+                        <div class="h-12 mb-4 flex items-center justify-center text-red-500">
+                            <!-- Text Logo Style -->
+                            <span class="font-bold text-2xl font-sans tracking-tighter">airbnb</span>
+                        </div>
+                        <div class="flex justify-center gap-1 text-terra mb-2">
+                            <span class="star-anim text-xl">★</span><span class="star-anim text-xl">★</span><span class="star-anim text-xl">★</span><span class="star-anim text-xl">★</span><span class="star-anim text-xl">★</span>
+                        </div>
+                        <p class="font-bold text-gray-700">5.0 / 5.0</p>
+                        <p class="text-xs text-gray-400 mt-1">Superhost</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- INFO & MAP (Target: dove-siamo) -->
+        <section id="dove-siamo" class="flex flex-col md:flex-row h-auto md:h-[500px]">
+            <div class="md:w-1/2 bg-olive-dark text-cream p-12 md:p-20 flex flex-col justify-center text-base lg:text-lg">
+                <span class="text-terra text-sm lg:text-base tracking-widest uppercase font-bold mb-2" data-i18n="contact_subtitle">Contatti</span>
+                <h2 class="text-4xl lg:text-5xl font-serif mb-8" data-i18n="contact_title">Vienici a trovare</h2>
+                <div class="space-y-6 font-light">
+                    <p class="flex items-start gap-4">
+                        <svg class="w-6 h-6 text-terra shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span>Località Bellavista 1, <br>Seggiano (GR), Toscana</span>
+                    </p>
+                    <!-- Clickable Phones with hover effect -->
+                    <div class="flex flex-col gap-3">
+                        <a href="tel:+393471711648" class="flex items-center gap-4 hover:text-terra transition-colors group">
+                            <svg class="w-6 h-6 text-terra shrink-0 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <span>+39 347 1711648</span>
+                        </a>
+                        <a href="tel:+393487556267" class="flex items-center gap-4 hover:text-terra transition-colors group">
+                            <svg class="w-6 h-6 text-terra shrink-0 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <span>+39 348 7556267</span>
+                        </a>
+                    </div>
+
+                    <!-- Clickable Email with hover effect -->
+                    <a href="mailto:info@agriturismo-bellavista.it" class="flex items-center gap-4 hover:text-terra transition-colors group">
+                        <svg class="w-6 h-6 text-terra shrink-0 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        <span>info@agriturismo-bellavista.it</span>
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 h-96 md:h-auto relative bg-gray-200">
+                 <!-- Google Map Embed Updated to specific location -->
+                 <iframe 
+                    src="https://maps.google.com/maps?q=Agriturismo+Bellavista+Seggiano&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade"
+                    class="w-full h-full grayscale-[0.2]">
+                 </iframe>
+                 
+                 <!-- Overlay Button (pointer-events-none allows clicking the map behind the overlay) -->
+                 <div class="absolute inset-0 flex items-center justify-center bg-black/10 pointer-events-none">
+                     <a href="https://maps.app.goo.gl/7SqhcNXH6SN9H1VMA" target="_blank" class="pointer-events-auto bg-white text-olive font-bold py-3 px-8 shadow-lg hover:scale-105 transition-transform uppercase tracking-widest text-xs" data-i18n="contact_map_btn">Apri Mappa</a>
+                 </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- ================= GALLERY VIEW ================= -->
+    <section id="gallery-view" class="view-hidden w-full min-h-screen bg-cream">
+        <!-- Hero Video Header -->
+        <div class="relative h-[80vh] overflow-hidden">
+            <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover">
+                <!-- Placeholder Video Source (Nature/Tuscany style) -->
+                <source src="https://www.tekeye.uk/html/images/Joren_Falls_Izu_Jap.mp4" type="video/mp4">
+                Il tuo browser non supporta il video.
+            </video>
+            <div class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-white text-center px-4 pt-20">
+                <h1 class="text-5xl lg:text-7xl font-serif mb-4 drop-shadow-lg transform translate-y-10" data-i18n="gal_title">La Nostra Tenuta</h1>
+                <p class="text-xl lg:text-2xl font-light tracking-wider mb-8 transform translate-y-10" data-i18n="gal_subtitle">Un tour virtuale tra natura e relax</p>
+                <button onclick="showMain()" class="border-2 border-white px-8 py-3 uppercase tracking-widest text-sm hover:bg-white hover:text-olive transition-colors transform translate-y-10" data-i18n="btn_back_home">Torna alla Home</button>
+            </div>
+        </div>
+
+        <!-- Gallery Content -->
+        <div class="container mx-auto px-6 py-20">
+            <!-- Filter tabs (visual only for now, can be functional) -->
+            <div class="flex justify-center flex-wrap gap-4 mb-12">
+                <button onclick="filterGallery('all', this)" class="gallery-filter-btn px-6 py-2 bg-olive text-white rounded-full text-sm uppercase tracking-wider transition-colors active" data-i18n="gal_filter_all">Tutte</button>
+                <button onclick="filterGallery('interni', this)" class="gallery-filter-btn px-6 py-2 bg-white border border-gray-200 text-gray-600 hover:text-olive hover:border-olive rounded-full text-sm uppercase tracking-wider transition-colors" data-i18n="gal_filter_int">Interni</button>
+                <button onclick="filterGallery('esterni', this)" class="gallery-filter-btn px-6 py-2 bg-white border border-gray-200 text-gray-600 hover:text-olive hover:border-olive rounded-full text-sm uppercase tracking-wider transition-colors" data-i18n="gal_filter_ext">Esterni</button>
+                <button onclick="filterGallery('piscina', this)" class="gallery-filter-btn px-6 py-2 bg-white border border-gray-200 text-gray-600 hover:text-olive hover:border-olive rounded-full text-sm uppercase tracking-wider transition-colors" data-i18n="gal_filter_pool">Piscina</button>
+                <button onclick="filterGallery('prodotti', this)" class="gallery-filter-btn px-6 py-2 bg-white border border-gray-200 text-gray-600 hover:text-olive hover:border-olive rounded-full text-sm uppercase tracking-wider transition-colors" data-i18n="gal_filter_prod">Prodotti</button>                
+            </div>
+
+            <!-- Masonry Grid with Dynamic Reveal -->
+            <div id="main-gallery-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Javascript will inject images here with animations -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ACTIVITIES VIEW ================= -->
+    <section id="activities-view" class="view-hidden bg-white min-h-screen">
+        <!-- Hero Section -->
+        <div class="relative h-[60vh] bg-gray-800">
+            <img src="https://images.unsplash.com/photo-1544367563-12123d8965cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" alt="Attività Header" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <div class="text-center text-white p-4">
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif mb-4 drop-shadow-lg" data-i18n="act_view_title">Le Nostre Attività</h1>
+                    <p class="text-xl md:text-2xl font-light tracking-wider" data-i18n="act_view_subtitle">Esperienze uniche a contatto con la natura</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 py-16">
+            <!-- Back Button -->
+            <div class="mb-12">
+                <button onclick="showMain()" class="flex items-center gap-2 text-olive hover:text-terra transition-colors uppercase text-xs lg:text-sm font-bold tracking-widest">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    <span data-i18n="btn_back_home">Torna alla Home</span>
+                </button>
+            </div>
+
+            <!-- Activity List Container -->
+            <div id="activity-list-container" class="space-y-24">
+                <!-- Javascript will inject activities here -->
+            </div>
+
+            <!-- Contact Form -->
+            <div class="mt-24 max-w-3xl mx-auto">
+                <div class="bg-stone-custom p-8 md:p-12 rounded-sm shadow-xl border border-gray-100 text-center">
+                    <span class="text-sm lg:text-base text-gray-500 uppercase tracking-wider" data-i18n="form_act_subtitle">Prenota la tua esperienza</span>
+                    <h3 class="text-2xl lg:text-4xl font-serif text-olive-dark mt-2 mb-8" data-i18n="form_act_title">Richiedi Informazioni</h3>
+                    
+                    <form onsubmit="sendActivityRequest(event)" class="text-left space-y-6">
+                        <div class="hidden" style="display:none;"><label>Non compilare:</label><input type="text" name="honeypot_field" tabindex="-1" autocomplete="off"></div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs uppercase font-bold text-gray-500 mb-1" data-i18n="form_name">Nome e Cognome</label>
+                                <input type="text" name="nome" class="w-full border border-gray-300 p-3 rounded-sm focus:ring-olive focus:border-olive focus:outline-none bg-white" required placeholder="Mario Rossi">
+                            </div>
+                            <div>
+                                <label class="block text-xs uppercase font-bold text-gray-500 mb-1" data-i18n="form_email">E-mail</label>
+                                <input type="email" name="email" class="w-full border border-gray-300 p-3 rounded-sm focus:ring-olive focus:border-olive focus:outline-none bg-white" required placeholder="mario@email.com">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs uppercase font-bold text-gray-500 mb-2" data-i18n="form_act_select">Quali attività ti interessano?</label>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="activity-checkboxes">
+                                <!-- Checkboxes injected by JS -->
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs uppercase font-bold text-gray-500 mb-1" data-i18n="form_participants">Numero Partecipanti</label>
+                            <input type="number" name="partecipanti" min="1" class="w-full border border-gray-300 p-3 rounded-sm focus:ring-olive focus:border-olive focus:outline-none bg-white" required placeholder="Es. 4">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs uppercase font-bold text-gray-500 mb-1" data-i18n="form_message">Messaggio o Richieste Particolari</label>
+                            <textarea name="messaggio" rows="4" class="w-full border border-gray-300 p-3 rounded-sm focus:ring-olive focus:border-olive focus:outline-none bg-white" placeholder="..."></textarea>
+                        </div>
+
+                        <div class="pt-4 border-t border-gray-200">
+                            <label class="block text-xs uppercase font-bold text-olive mb-1" data-i18n="form_security">Controllo di sicurezza</label>
+                            <div class="flex items-center gap-3">
+                                <span class="text-gray-600 font-bold" data-i18n="form_math">Quanto fa 3 + 2?</span>
+                                <input type="number" name="captcha" class="w-20 border border-gray-300 p-2 rounded-sm focus:ring-olive focus:border-olive text-center" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="block w-full bg-olive text-white py-4 font-bold uppercase tracking-widest hover:bg-olive-dark transition-colors rounded-sm shadow-md hover:shadow-lg mt-6 transform hover:-translate-y-1 duration-300" data-i18n="form_submit">Invia Richiesta</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= APARTMENT DETAIL VIEW ================= -->
+    <section id="detail-view" class="view-hidden bg-white min-h-screen">
+        <!-- Dynamic Content Header -->
+        <div class="relative h-[50vh] md:h-[60vh] bg-gray-800">
+            <img id="detail-hero" src="" alt="Hero Appartamento" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <div class="text-center text-white p-4">
+                    <h1 id="detail-title" class="text-4xl md:text-6xl lg:text-7xl font-serif mb-4 drop-shadow-lg"></h1>
+                    <p id="detail-price" class="text-xl md:text-2xl lg:text-3xl font-light tracking-wider"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 py-16">
+            
+            <!-- Back Button -->
+            <div class="mb-8">
+                <button onclick="showMain()" class="flex items-center gap-2 text-olive hover:text-terra transition-colors uppercase text-xs lg:text-sm font-bold tracking-widest">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    <span data-i18n="btn_back_home">Torna alla Home</span>
+                </button>
+            </div>
+
+            <div class="flex flex-col lg:flex-row gap-16">
+                <!-- Left: Description & Features -->
+                <div class="lg:w-2/3">
+                    <h2 class="text-3xl lg:text-4xl font-serif text-olive-dark mb-6" data-i18n="dtl_desc">Descrizione</h2>
+                    <p id="detail-desc" class="text-gray-600 leading-relaxed text-lg lg:text-xl mb-10"></p>
+
+                    <h3 class="text-2xl lg:text-3xl font-serif text-olive-dark mb-6" data-i18n="dtl_amenities">Servizi e Comfort</h3>
+                    <div id="detail-amenities" class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12 text-sm lg:text-base">
+                        <!-- Amenities injected via JS -->
+                    </div>
+
+                    <!-- Photo Gallery Grid -->
+                    <h3 class="text-2xl lg:text-3xl font-serif text-olive-dark mb-6" data-i18n="dtl_gallery">Galleria Fotografica</h3>
+                    <p class="text-sm lg:text-base text-gray-500 mb-4 italic" data-i18n="dtl_click_photo">Clicca sulle foto per ingrandirle</p>
+                    
+                    <!-- NEW GALLERY GRID CONTAINER -->
+                    <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[200px]">
+                        <!-- Images injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Right: Booking Card or Contact Form -->
+                <div class="lg:w-1/3">
+                    <div id="booking-sidebar-content" class="bg-stone-custom p-8 rounded-sm sticky top-32 shadow-xl border border-gray-100 text-center">
+                        <!-- Content Injected via JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX GALLERY MODAL -->
+    <div id="lightbox-modal" class="fixed inset-0 lightbox-overlay z-[100] hidden flex items-center justify-center p-4">
+        <!-- Close Button -->
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-4xl hover:text-terra z-[101]">&times;</button>
+        
+        <!-- Prev Button -->
+        <button onclick="changeSlide(-1)" class="absolute left-4 text-white hover:text-terra z-[101]">
+            <svg class="w-10 h-10 md:w-16 md:h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+
+        <!-- Image Container -->
+        <div class="relative w-full max-w-5xl max-h-[90vh] flex items-center justify-center">
+            <img id="lightbox-image" src="" class="max-w-full max-h-[85vh] object-contain shadow-2xl rounded-sm">
+            <div class="absolute bottom-[-40px] text-white text-sm tracking-widest uppercase">
+                <span id="lightbox-counter">1 / 6</span>
+            </div>
+        </div>
+
+        <!-- Next Button -->
+        <button onclick="changeSlide(1)" class="absolute right-4 text-white hover:text-terra z-[101]">
+            <svg class="w-10 h-10 md:w-16 md:h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="contatti" class="bg-stone-900 text-white py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+            <div class="text-center md:text-left">
+                <a href="#" class="text-2xl lg:text-3xl font-serif font-bold tracking-wider uppercase">Bellavista</a>
+                <p class="text-gray-500 text-sm lg:text-base mt-2">© 2025 Agriturismo Bellavista. P.IVA 01450190531</p>
+                <p class="text-gray-500 text-xs lg:text-sm mt-1">REA: GR-125177 | Cap. Soc. € 100.000 i.v.</p>
+                <p class="text-gray-500 text-xs lg:text-sm mt-1">CIN: IT053025B5DRR4SL95</p>
+            </div>
+            <div class="flex flex-col items-center">
+                <div class="flex space-x-6 items-center">
+                    <!-- Instagram -->
+                    <a href="https://www.instagram.com/agriturismo.bellavista?igsh=NHV0ODZlczVza3Jw" target="_blank" class="text-gray-400 hover:text-terra transition-colors" aria-label="Instagram">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    </a>
+                    
+                    <!-- Facebook -->
+                    <a href="https://www.facebook.com/share/19xu8pDRiM/" target="_blank" class="text-gray-400 hover:text-terra transition-colors" aria-label="Facebook">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+
+                    <!-- TikTok -->
+                    <a href="https://www.tiktok.com/@agriturismo.bellavista?_r=1&_t=ZN-91wbLROQlYE" target="_blank" class="text-gray-400 hover:text-terra transition-colors" aria-label="TikTok">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.74-1.61.57-.96.61-2.1.61-3.17-.03-5.24-.04-10.49-.04-15.74z"/>
+                        </svg>
+                    </a>
+                </div>
+                <p class="text-[10px] text-gray-500 mt-4 max-w-xs text-center leading-tight">
+                    * This site is not part of the Facebook website or Facebook Inc. Additionally, this site is NOT endorsed by Facebook in any way. FACEBOOK is a trademark of FACEBOOK, Inc.
+                </p>
+            </div>
+            <div class="text-center md:text-right">
+                <!-- Pulsanti per Modali -->
+                <button onclick="openModal('privacy-modal')" class="text-gray-500 text-xs lg:text-sm hover:text-white block mb-1 w-full md:w-auto text-right cursor-pointer">Privacy Policy</button>
+                <button onclick="openModal('cookie-modal')" class="text-gray-500 text-xs lg:text-sm hover:text-white block w-full md:w-auto text-right cursor-pointer">Cookie Policy</button>
+                <button onclick="resetCookies()" class="text-gray-600 text-[10px] lg:text-xs hover:text-terra block mt-2 w-full md:w-auto text-right cursor-pointer" data-i18n="footer_cookies">Gestisci preferenze cookie</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- COOKIE BANNER -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-[90] p-6 hidden">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-sm text-gray-600 md:w-1/2">
+                <strong class="text-olive-dark" data-i18n="cookie_title">La tua privacy è importante</strong><br>
+                <span data-i18n="cookie_text">Utilizziamo cookie tecnici per far funzionare il sito e, con il tuo consenso, cookie analitici e di profilazione per migliorare la tua esperienza.</span>
+                <button onclick="openModal('cookie-modal')" class="text-terra underline hover:text-olive ml-1" data-i18n="cookie_read_more">Leggi la Cookie Policy</button>.
+            </div>
+            <div class="flex flex-wrap gap-3 justify-end md:w-1/2">
+                <button onclick="openModal('cookie-modal')" class="px-4 py-2 border border-olive text-olive text-xs font-bold uppercase tracking-wider hover:bg-olive hover:text-white transition-colors rounded-sm" data-i18n="cookie_btn_personalize">
+                    Personalizza
+                </button>
+                <button onclick="rejectAllCookies()" class="px-4 py-2 border border-gray-300 text-gray-600 text-xs font-bold uppercase tracking-wider hover:bg-gray-100 transition-colors rounded-sm" data-i18n="cookie_btn_reject">
+                    Rifiuta Tutto
+                </button>
+                <button onclick="acceptAllCookies()" class="px-6 py-2 bg-olive text-white text-xs font-bold uppercase tracking-wider hover:bg-olive-dark transition-colors rounded-sm" data-i18n="cookie_btn_accept">
+                    Accetta Tutto
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRIVACY MODAL (Invariato) -->
+    <div id="privacy-modal" class="fixed inset-0 modal-bg z-[100] hidden flex items-center justify-center p-4">
+        <!-- ... contenuto privacy modal invariato ... -->
+        <div class="bg-white w-full max-w-3xl max-h-[80vh] overflow-y-auto rounded-sm shadow-2xl relative">
+            <div class="sticky top-0 bg-white border-b border-gray-100 p-6 flex justify-between items-center z-10">
+                <h3 class="text-2xl font-serif text-olive-dark">Privacy Policy</h3>
+                <button onclick="closeModal('privacy-modal')" class="text-gray-400 hover:text-olive text-3xl">&times;</button>
+            </div>
+            <div class="p-8 text-sm text-gray-600 leading-relaxed space-y-4" data-i18n="privacy_content">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- COOKIE MODAL (Gestione Preferenze) -->
+    <div id="cookie-modal" class="fixed inset-0 modal-bg z-[100] hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-3xl max-h-[85vh] overflow-y-auto rounded-sm shadow-2xl relative">
+            <div class="sticky top-0 bg-white border-b border-gray-100 p-6 flex justify-between items-center z-10">
+                <h3 class="text-2xl font-serif text-olive-dark" data-i18n="cookie_modal_title">Gestione Cookie</h3>
+                <button onclick="closeModal('cookie-modal')" class="text-gray-400 hover:text-olive text-3xl">&times;</button>
+            </div>
+            <div class="p-8 text-sm text-gray-600 leading-relaxed">
+                <p class="mb-6" data-i18n="cookie_modal_desc">Questo pannello ti permette di esprimere le tue preferenze in merito ai cookie e alle tecnologie di tracciamento che adottiamo.</p>
+
+                <!-- Cookie Tecnici (Obbligatori) -->
+                <div class="flex justify-between items-center border border-gray-200 p-5 rounded bg-gray-50 mb-4">
+                    <div class="pr-4">
+                        <strong class="block text-olive-dark text-base mb-1" data-i18n="cookie_cat_tech">Cookie Tecnici (Necessari)</strong>
+                        <p class="text-xs text-gray-500" data-i18n="cookie_cat_tech_desc">Questi cookie sono indispensabili per il funzionamento del sito (es. sessione, sicurezza). Non possono essere disattivati dai nostri sistemi.</p>
+                    </div>
+                    <div class="shrink-0">
+                        <label class="relative inline-flex items-center cursor-not-allowed">
+                            <input type="checkbox" checked disabled class="sr-only peer">
+                            <div class="w-11 h-6 bg-olive/50 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-olive"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Cookie Analitici (Opzionali) -->
+                <div class="flex justify-between items-center border border-gray-200 p-5 rounded bg-white mb-4 hover:border-olive/30 transition-colors">
+                    <div class="pr-4">
+                        <strong class="block text-olive-dark text-base mb-1" data-i18n="cookie_cat_ana">Cookie Analitici</strong>
+                        <p class="text-xs text-gray-500" data-i18n="cookie_cat_ana_desc">Ci permettono di contare le visite e le fonti di traffico per misurare e migliorare le prestazioni del nostro sito.</p>
+                    </div>
+                    <div class="shrink-0">
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="pref-analytics" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-olive"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Cookie Terze Parti/Marketing (Opzionali) -->
+                <div class="flex justify-between items-center border border-gray-200 p-5 rounded bg-white mb-6 hover:border-olive/30 transition-colors">
+                    <div class="pr-4">
+                        <strong class="block text-olive-dark text-base mb-1" data-i18n="cookie_cat_mkt">Cookie di Terze Parti e Profilazione</strong>
+                        <p class="text-xs text-gray-500" data-i18n="cookie_cat_mkt_desc">Possono essere impostati tramite il nostro sito dai nostri partner per mostrare contenuti personalizzati.</p>
+                    </div>
+                    <div class="shrink-0">
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="pref-marketing" class="sr-only peer">
+                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-olive"></div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-gray-100 flex flex-col sm:flex-row justify-end gap-3">
+                     <button onclick="acceptAllCookies()" class="px-6 py-3 bg-olive text-white font-bold uppercase tracking-widest hover:bg-olive-dark rounded-sm transition-colors text-xs sm:text-sm w-full sm:w-auto" data-i18n="cookie_btn_accept">
+                        Accetta Tutti
+                    </button>
+                    <button onclick="saveCookiePreferences()" class="px-6 py-3 border-2 border-olive text-olive font-bold uppercase tracking-widest hover:bg-olive hover:text-white rounded-sm transition-colors text-xs sm:text-sm w-full sm:w-auto" data-i18n="cookie_btn_save">
+                        Salva le mie scelte
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- TRANSLATION DATA ---
+        const translations = {
+            it: {
+                nav_home: "Home", nav_about: "Chi Siamo", nav_activities: "Attività", nav_apartments: "Appartamenti", nav_location: "Dove Siamo", nav_gallery: "Galleria", nav_contacts: "Contatti", nav_book: "Prenota",
+                hero_welcome: "Benvenuti in Toscana", hero_desc: "Dove la natura incontra l'eleganza. Riscopri il tempo lento tra oliveti e dolci colline Toscane.", hero_cta: "Scopri le Dimore",
+                intro_subtitle: "La Nostra Storia", intro_title: "Un rifugio per l'anima",
+                intro_p1: "Immerso nel cuore verde della Toscana, Agriturismo Bellavista nasce dal restauro conservativo di un antico casale del 1700. Qui, il silenzio è rotto solo dal canto delle cicale e dal fruscio del vento tra gli ulivi.",
+                intro_p2: "Offriamo un'esperienza autentica, dove la tradizione contadina si sposa con il comfort moderno. Che siate alla ricerca di una fuga romantica o di una vacanza in famiglia, troverete qui la vostra seconda casa.",
+                act_subtitle: "Esperienze Uniche", act_title: "Le Nostre Attività", act_desc: "Abbiamo curato per voi una selezione di esperienze per vivere appieno il territorio.", act_cta: "Prenota un'esperienza",
+                act_card_shepherd_title: "Una Giornata da Pastore", act_card_shepherd_desc: "Interpreta per un giorno la vita del pastore e impara a vivere con le pecore.",
+                act_card_trek_title: "Escursioni e Trekking", act_card_trek_desc: "Passeggiate al tramonto attraverso i boschi e le colline circostanti, guidati da guide ambientali esperte.",
+                act_card_tasting_title: "Degustazioni", act_card_tasting_desc: "Esplora i sapori della nostra regione. Un viaggio sensoriale tra eccellenze casearie e salumi tipici.",
+                act_card_animals_title: "Animali", act_card_animals_desc: "Abbiamo dei Pony e dei Ciuchini con cui interagire gratuitamente. Un'occasione speciale per coccolare i nostri amici a quattro zampe.",
+                apt_subtitle: "Soggiorno", apt_title: "Le Nostre Dimore", apt_view_all: "Vedi tutti →", apt_view_all_btn: "Vedi tutti gli appartamenti",
+                apt_guests: "Ospiti", apt_night: "/notte", apt_details: "Dettagli", apt_from: "da",
+                rev_subtitle: "COSA DICONO DI NOI", rev_title: "L'Eccellenza Riconosciuta", rev_excellent: "Eccellente", rev_exceptional: "Eccezionale",
+                contact_subtitle: "Contatti", contact_title: "Vienici a trovare", contact_map_btn: "Apri Mappa", footer_cookies: "Gestisci preferenze cookie",
+                gal_title: "La Nostra Tenuta", gal_subtitle: "Un tour virtuale tra natura e relax", btn_back_home: "Torna alla Home",
+                gal_filter_all: "Tutte", gal_filter_int: "Interni", gal_filter_ext: "Esterni", gal_filter_pool: "Piscina", gal_filter_prod: "Prodotti",
+                act_view_title: "Le Nostre Attività", act_view_subtitle: "Esperienze uniche a contatto con la natura",
+                form_act_subtitle: "Prenota la tua esperienza", form_act_title: "Richiedi Informazioni",
+                form_name: "Nome e Cognome", form_email: "E-mail", form_act_select: "Quali attività ti interessano?", form_participants: "Numero Partecipanti", form_message: "Messaggio o Richieste Particolari", form_security: "Controllo di sicurezza", form_math: "Quanto fa 3 + 2?", form_submit: "Invia Richiesta",
+                dtl_desc: "Descrizione", dtl_amenities: "Servizi e Comfort", dtl_gallery: "Galleria Fotografica", dtl_click_photo: "Clicca sulle foto per ingrandirle",
+                book_req_title: "Richiedi Preventivo", book_verify: "Verifica Disponibilità", book_verify_text: "Prenota direttamente online per assicurarti la migliore tariffa garantita e disponibilità immediata.", book_secure: "Pagamenti sicuri", book_now: "Prenota Ora",
+                sala_cond: "Condizioni di Affitto:", sala_cond_text: "Il costo è di <strong class='text-olive'>15€ a persona</strong>. Raggiunta la quota di 20 persone (300€), il prezzo si blocca e diventa <strong class='text-olive'>fisso a 300€</strong> fino alla capienza massima di 60 persone.", sala_feedback: "Totale stimato:",
+                // Cookies & Privacy
+                cookie_title: "La tua privacy è importante", cookie_text: "Utilizziamo cookie tecnici per far funzionare il sito e, con il tuo consenso, cookie analitici e di profilazione per migliorare la tua esperienza.", cookie_read_more: "Leggi la Cookie Policy", cookie_btn_personalize: "Personalizza", cookie_btn_reject: "Rifiuta Tutto", cookie_btn_accept: "Accetta Tutto",
+                cookie_modal_title: "Gestione Cookie", cookie_modal_desc: "Questo pannello ti permette di esprimere le tue preferenze in merito ai cookie e alle tecnologie di tracciamento che adottiamo.", cookie_cat_tech: "Cookie Tecnici (Necessari)", cookie_cat_tech_desc: "Questi cookie sono indispensabili per il funzionamento del sito (es. sessione, sicurezza). Non possono essere disattivati dai nostri sistemi.", cookie_cat_ana: "Cookie Analitici", cookie_cat_ana_desc: "Ci permettono di contare le visite e le fonti di traffico per misurare e migliorare le prestazioni del nostro sito.", cookie_cat_mkt: "Cookie di Terze Parti e Profilazione", cookie_cat_mkt_desc: "Possono essere impostati tramite il nostro sito dai nostri partner per mostrare contenuti personalizzati.", cookie_btn_save: "Salva le mie scelte",
+                privacy_content: `<p class="font-bold">Informativa ai sensi dell'art. 13 del Regolamento UE 2016/679 (GDPR)</p><h4 class="text-lg text-olive font-bold mt-4">1. Titolare del Trattamento</h4><p>Il Titolare del trattamento è <strong>Agriturismo Bellavista S.r.l.</strong>, con sede legale in Località Bellavista 1, 58038 Seggiano (GR). P.IVA 01450190531. Email di contatto: info@agriturismo-bellavista.it.</p><h4 class="text-lg text-olive font-bold mt-4">2. Tipologia di Dati Trattati</h4><ul class="list-disc pl-5 space-y-1"><li><strong>Dati di navigazione:</strong> cookie, dati di utilizzo.</li><li><strong>Dati forniti volontariamente:</strong> nome, email, telefono nel modulo contatti.</li></ul><h4 class="text-lg text-olive font-bold mt-4">3. Finalità del Trattamento</h4><p>I dati sono raccolti per fornire servizi, rispondere a richieste e per statistiche anonime.</p><h4 class="text-lg text-olive font-bold mt-4">4. Base Giuridica</h4><p>Il trattamento è basato sul consenso dell'utente e sull'esecuzione di misure precontrattuali.</p><h4 class="text-lg text-olive font-bold mt-4">5. Diritti dell'Interessato</h4><p>L'utente ha diritto di accesso, rettifica, cancellazione e portabilità dei propri dati.</p>`
+            },
+            en: {
+                nav_home: "Home", nav_about: "About Us", nav_activities: "Activities", nav_apartments: "Apartments", nav_location: "Location", nav_gallery: "Gallery", nav_contacts: "Contact", nav_book: "Book Now",
+                hero_welcome: "Welcome to Tuscany", hero_desc: "Where nature meets elegance. Rediscover slow time among olive groves and rolling Tuscan hills.", hero_cta: "Discover the Homes",
+                intro_subtitle: "Our Story", intro_title: "A retreat for the soul",
+                intro_p1: "Immersed in the green heart of Tuscany, Agriturismo Bellavista was born from the conservative restoration of an ancient 1700s farmhouse. Here, silence is broken only by the singing of cicadas and the rustle of wind through the olive trees.",
+                intro_p2: "We offer an authentic experience where peasant tradition marries modern comfort. Whether you are looking for a romantic getaway or a family vacation, you will find your second home here.",
+                act_subtitle: "Unique Experiences", act_title: "Our Activities", act_desc: "We have curated a selection of experiences for you to fully experience the territory.", act_cta: "Book an experience",
+                act_card_shepherd_title: "A Day as a Shepherd", act_card_shepherd_desc: "Live the life of a shepherd for a day and learn to live with the sheep.",
+                act_card_trek_title: "Excursions & Trekking", act_card_trek_desc: "Sunset walks through the woods and surrounding hills, led by expert environmental guides.",
+                act_card_tasting_title: "Tastings", act_card_tasting_desc: "Explore the flavors of our region. A sensory journey through dairy excellence and typical cured meats.",
+                act_card_animals_title: "Animals", act_card_animals_desc: "We have Ponies and Donkeys to interact with for free. A special occasion to cuddle our four-legged friends.",
+                apt_subtitle: "Stay", apt_title: "Our Homes", apt_view_all: "View all →", apt_view_all_btn: "View all apartments",
+                apt_guests: "Guests", apt_night: "/night", apt_details: "Details", apt_from: "from",
+                rev_subtitle: "WHAT THEY SAY ABOUT US", rev_title: "Recognized Excellence", rev_excellent: "Excellent", rev_exceptional: "Exceptional",
+                contact_subtitle: "Contacts", contact_title: "Come visit us", contact_map_btn: "Open Map", footer_cookies: "Manage cookie preferences",
+                gal_title: "Our Estate", gal_subtitle: "A virtual tour between nature and relaxation", btn_back_home: "Back to Home",
+                gal_filter_all: "All", gal_filter_int: "Interior", gal_filter_ext: "Exterior", gal_filter_pool: "Pool", gal_filter_prod: "Products",
+                act_view_title: "Our Activities", act_view_subtitle: "Unique experiences in contact with nature",
+                form_act_subtitle: "Book your experience", form_act_title: "Request Information",
+                form_name: "Name and Surname", form_email: "E-mail", form_act_select: "Which activities interest you?", form_participants: "Number of Participants", form_message: "Message or Special Requests", form_security: "Security Check", form_math: "What is 3 + 2?", form_submit: "Send Request",
+                dtl_desc: "Description", dtl_amenities: "Amenities & Comfort", dtl_gallery: "Photo Gallery", dtl_click_photo: "Click photos to enlarge",
+                book_req_title: "Request Quote", book_verify: "Check Availability", book_verify_text: "Book directly online to ensure the best guaranteed rate and immediate availability.", book_secure: "Secure payments", book_now: "Book Now",
+                sala_cond: "Rental Conditions:", sala_cond_text: "The cost is <strong class='text-olive'>15€ per person</strong>. Upon reaching 20 people (300€), the price is locked and becomes <strong class='text-olive'>fixed at 300€</strong> up to the maximum capacity of 60 people.", sala_feedback: "Estimated total:",
+                // Cookies & Privacy
+                cookie_title: "Your privacy matters", cookie_text: "We use technical cookies to make the site work and, with your consent, analytical and profiling cookies to improve your experience.", cookie_read_more: "Read Cookie Policy", cookie_btn_personalize: "Customize", cookie_btn_reject: "Reject All", cookie_btn_accept: "Accept All",
+                cookie_modal_title: "Cookie Management", cookie_modal_desc: "This panel allows you to express your preferences regarding cookies and tracking technologies we use.", cookie_cat_tech: "Technical Cookies (Necessary)", cookie_cat_tech_desc: "These cookies are essential for the site to function (e.g., session, security). They cannot be disabled.", cookie_cat_ana: "Analytical Cookies", cookie_cat_ana_desc: "Allow us to count visits and traffic sources to measure and improve performance.", cookie_cat_mkt: "Marketing Cookies", cookie_cat_mkt_desc: "May be set through our site by our partners to show personalized content.", cookie_btn_save: "Save my choices",
+                privacy_content: `<p class="font-bold">Information pursuant to Art. 13 of EU Regulation 2016/679 (GDPR)</p><h4 class="text-lg text-olive font-bold mt-4">1. Data Controller</h4><p>The Data Controller is <strong>Agriturismo Bellavista S.r.l.</strong>, registered office at Località Bellavista 1, 58038 Seggiano (GR). VAT 01450190531. Contact email: info@agriturismo-bellavista.it.</p><h4 class="text-lg text-olive font-bold mt-4">2. Types of Data Processed</h4><ul class="list-disc pl-5 space-y-1"><li><strong>Navigation data:</strong> cookies, usage data.</li><li><strong>Voluntarily provided data:</strong> name, email, phone in contact forms.</li></ul><h4 class="text-lg text-olive font-bold mt-4">3. Purpose of Processing</h4><p>Data is collected to provide services, respond to requests, and for anonymous statistics.</p><h4 class="text-lg text-olive font-bold mt-4">4. Legal Basis</h4><p>Processing is based on user consent and the execution of pre-contractual measures.</p><h4 class="text-lg text-olive font-bold mt-4">5. Rights of the Data Subject</h4><p>The user has the right to access, rectify, cancel, and transfer their data.</p>`
+            },
+            de: {
+                nav_home: "Startseite", nav_about: "Über Uns", nav_activities: "Aktivitäten", nav_apartments: "Ferienwohnungen", nav_location: "Standort", nav_gallery: "Galerie", nav_contacts: "Kontakt", nav_book: "Buchen",
+                hero_welcome: "Willkommen in der Toskana", hero_desc: "Wo Natur auf Eleganz trifft. Entdecken Sie die langsame Zeit zwischen Olivenhainen und sanften toskanischen Hügeln.", hero_cta: "Entdecken Sie die Wohnungen",
+                intro_subtitle: "Unsere Geschichte", intro_title: "Ein Rückzugsort für die Seele",
+                intro_p1: "Im grünen Herzen der Toskana gelegen, entstand der Agriturismo Bellavista aus der konservativen Restaurierung eines alten Bauernhauses aus dem Jahr 1700. Hier wird die Stille nur vom Gesang der Zikaden und dem Rauschen des Windes in den Olivenbäumen unterbrochen.",
+                intro_p2: "Wir bieten eine authentische Erfahrung, wo bäuerliche Tradition auf modernen Komfort trifft. Ob Sie einen romantischen Kurzurlaub oder einen Familienurlaub suchen, hier finden Sie Ihr zweites Zuhause.",
+                act_subtitle: "Einzigartige Erlebnisse", act_title: "Unsere Aktivitäten", act_desc: "Wir haben eine Auswahl an Erlebnissen für Sie zusammengestellt, um das Gebiet voll zu erleben.", act_cta: "Ein Erlebnis buchen",
+                act_card_shepherd_title: "Ein Tag als Schäfer", act_card_shepherd_desc: "Leben Sie einen Tag lang das Leben eines Schäfers und lernen Sie, mit den Schafen zu leben.",
+                act_card_trek_title: "Wandern & Trekking", act_card_trek_desc: "Spaziergänge bei Sonnenuntergang durch die Wälder und umliegenden Hügel, geführt von erfahrenen Umweltführern.",
+                act_card_tasting_title: "Verkostungen", act_card_tasting_desc: "Entdecken Sie die Aromen unserer Region. Eine sensorische Reise durch Molkerei-Exzellenz und typische Wurstwaren.",
+                act_card_animals_title: "Tiere", act_card_animals_desc: "Wir haben Ponys und Esel, mit denen man kostenlos interagieren kann. Eine besondere Gelegenheit, unsere vierbeinigen Freunde zu kuscheln.",
+                apt_subtitle: "Aufenthalt", apt_title: "Unsere Wohnungen", apt_view_all: "Alle anzeigen →", apt_view_all_btn: "Alle Wohnungen anzeigen",
+                apt_guests: "Gäste", apt_night: "/Nacht", apt_details: "Details", apt_from: "ab",
+                rev_subtitle: "WAS MAN ÜBER UNS SAGT", rev_title: "Anerkannte Exzellenz", rev_excellent: "Ausgezeichnet", rev_exceptional: "Außergewöhnlich",
+                contact_subtitle: "Kontakte", contact_title: "Besuchen Sie uns", contact_map_btn: "Karte öffnen", footer_cookies: "Cookie-Einstellungen verwalten",
+                gal_title: "Unser Anwesen", gal_subtitle: "Eine virtuelle Tour zwischen Natur und Entspannung", btn_back_home: "Zurück zur Startseite",
+                gal_filter_all: "Alle", gal_filter_int: "Innen", gal_filter_ext: "Außen", gal_filter_pool: "Pool", gal_filter_prod: "Produkte",
+                act_view_title: "Unsere Aktivitäten", act_view_subtitle: "Einzigartige Erlebnisse in Kontakt mit der Natur",
+                form_act_subtitle: "Buchen Sie Ihr Erlebnis", form_act_title: "Informationen anfordern",
+                form_name: "Vor- und Nachname", form_email: "E-Mail", form_act_select: "Welche Aktivitäten interessieren Sie?", form_participants: "Teilnehmerzahl", form_message: "Nachricht oder besondere Wünsche", form_security: "Sicherheitscheck", form_math: "Wie viel ist 3 + 2?", form_submit: "Anfrage senden",
+                dtl_desc: "Beschreibung", dtl_amenities: "Ausstattung & Komfort", dtl_gallery: "Fotogalerie", dtl_click_photo: "Fotos zum Vergrößern anklicken",
+                book_req_title: "Angebot anfordern", book_verify: "Verfügbarkeit prüfen", book_verify_text: "Buchen Sie direkt online, um den besten garantierten Tarif und sofortige Verfügbarkeit zu sichern.", book_secure: "Sichere Zahlungen", book_now: "Jetzt buchen",
+                sala_cond: "Mietbedingungen:", sala_cond_text: "Die Kosten betragen <strong class='text-olive'>15€ pro Person</strong>. Bei Erreichen von 20 Personen (300€) wird der Preis fixiert und beträgt <strong class='text-olive'>pauschal 300€</strong> bis zur maximalen Kapazität von 60 Personen.", sala_feedback: "Geschätzte Summe:"
+            },
+            es: {
+                nav_home: "Inicio", nav_about: "Quiénes Somos", nav_activities: "Actividades", nav_apartments: "Apartamentos", nav_location: "Ubicación", nav_gallery: "Galería", nav_contacts: "Contactos", nav_book: "Reservar",
+                hero_welcome: "Bienvenidos a la Toscana", hero_desc: "Donde la naturaleza se encuentra con la elegancia. Redescubre el tiempo lento entre olivares y dulces colinas toscanas.", hero_cta: "Descubre las Residencias",
+                intro_subtitle: "Nuestra Historia", intro_title: "Un refugio para el alma",
+                intro_p1: "Inmerso en el corazón verde de la Toscana, Agriturismo Bellavista nace de la restauración conservadora de una antigua casa de campo del 1700. Aquí, el silencio solo se rompe por el canto de las cigarras y el susurro del viento entre los olivos.",
+                intro_p2: "Ofrecemos una experiencia auténtica, donde la tradición campesina se casa con el confort moderno. Ya sea que busques una escapada romántica o unas vacaciones en familia, encontrarás aquí tu segundo hogar.",
+                act_subtitle: "Experiencias Únicas", act_title: "Nuestras Actividades", act_desc: "Hemos seleccionado para ti una serie de experiencias para vivir plenamente el territorio.", act_cta: "Reservar una experiencia",
+                act_card_shepherd_title: "Un Día como Pastor", act_card_shepherd_desc: "Interpreta por un día la vida del pastor y aprende a vivir con las ovejas.",
+                act_card_trek_title: "Excursiones y Trekking", act_card_trek_desc: "Paseos al atardecer a través de los bosques y las colinas circundantes, guiados por expertos guías ambientales.",
+                act_card_tasting_title: "Degustaciones", act_card_tasting_desc: "Explora los sabores de nuestra región. Un viaje sensorial entre excelencias lácteas y embutidos típicos.",
+                act_card_animals_title: "Animales", act_card_animals_desc: "Tenemos Ponis y Burritos con los que interactuar gratuitamente. Una ocasión especial para mimar a nuestros amigos de cuatro patas.",
+                apt_subtitle: "Estancia", apt_title: "Nuestras Residencias", apt_view_all: "Ver todos →", apt_view_all_btn: "Ver todos los apartamentos",
+                apt_guests: "Huéspedes", apt_night: "/noche", apt_details: "Detalles", apt_from: "desde",
+                rev_subtitle: "LO QUE DICEN DE NOSOTROS", rev_title: "La Excelencia Reconocida", rev_excellent: "Excelente", rev_exceptional: "Excepcional",
+                contact_subtitle: "Contactos", contact_title: "Ven a visitarnos", contact_map_btn: "Abrir Mapa", footer_cookies: "Gestionar preferencias de cookies",
+                gal_title: "Nuestra Finca", gal_subtitle: "Un tour virtual entre naturaleza y relax", btn_back_home: "Volver al Inicio",
+                gal_filter_all: "Todas", gal_filter_int: "Interiores", gal_filter_ext: "Exteriores", gal_filter_pool: "Piscina", gal_filter_prod: "Productos",
+                act_view_title: "Nuestras Actividades", act_view_subtitle: "Experiencias únicas en contacto con la naturaleza",
+                form_act_subtitle: "Reserva tu experiencia", form_act_title: "Solicitar Información",
+                form_name: "Nombre y Apellido", form_email: "Correo electrónico", form_act_select: "¿Qué actividades te interesan?", form_participants: "Número de Participantes", form_message: "Mensaje o Solicitudes Especiales", form_security: "Control de seguridad", form_math: "¿Cuánto es 3 + 2?", form_submit: "Enviar Solicitud",
+                dtl_desc: "Descripción", dtl_amenities: "Servicios y Confort", dtl_gallery: "Galería Fotográfica", dtl_click_photo: "Haz clic en las fotos para ampliar",
+                book_req_title: "Solicitar Presupuesto", book_verify: "Verificar Disponibilidad", book_verify_text: "Reserva directamente online para asegurar la mejor tarifa garantizada y disponibilidad inmediata.", book_secure: "Pagos seguros", book_now: "Reservar Ahora",
+                sala_cond: "Condiciones de Alquiler:", sala_cond_text: "El costo es de <strong class='text-olive'>15€ por persona</strong>. Al llegar a 20 personas (300€), el precio se bloquea y se vuelve <strong class='text-olive'>fijo en 300€</strong> hasta la capacidad máxima de 60 personas.", sala_feedback: "Total estimado:"
+            },
+            fr: {
+                nav_home: "Accueil", nav_about: "Qui Sommes-nous", nav_activities: "Activités", nav_apartments: "Appartements", nav_location: "Où Sommes-nous", nav_gallery: "Galerie", nav_contacts: "Contacts", nav_book: "Réserver",
+                hero_welcome: "Bienvenue en Toscane", hero_desc: "Où la nature rencontre l'élégance. Redécouvrez le temps lent entre les oliveraies et les douces collines toscanes.", hero_cta: "Découvrez les Demeures",
+                intro_subtitle: "Notre Histoire", intro_title: "Un refuge pour l'âme",
+                intro_p1: "Immergé dans le cœur vert de la Toscane, l'Agriturismo Bellavista est né de la restauration conservatrice d'une ancienne ferme de 1700. Ici, le silence n'est rompu que par le chant des cigales et le bruissement du vent dans les oliviers.",
+                intro_p2: "Nous offrons une expérience authentique, où la tradition paysanne se marie au confort moderne. Que vous cherchiez une escapade romantique ou des vacances en famille, vous trouverez ici votre résidence secondaire.",
+                act_subtitle: "Expériences Uniques", act_title: "Nos Activités", act_desc: "Nous avons sélectionné pour vous des expériences pour vivre pleinement le territoire.", act_cta: "Réserver une expérience",
+                act_card_shepherd_title: "Une Journée de Berger", act_card_shepherd_desc: "Interprétez pour une journée la vie du berger et apprenez à vivre avec les moutons.",
+                act_card_trek_title: "Excursions et Trekking", act_card_trek_desc: "Promenades au coucher du soleil à travers les bois et les collines environnantes, guidées par des experts en environnement.",
+                act_card_tasting_title: "Dégustations", act_card_tasting_desc: "Explorez les saveurs de notre région. Un voyage sensoriel parmi l'excellence laitière et la charcuterie typique.",
+                act_card_animals_title: "Animaux", act_card_animals_desc: "Nous avons des Poneys et des Ânes avec lesquels interagir gratuitement. Une occasion spéciale pour câliner nos amis à quatre pattes.",
+                apt_subtitle: "Séjour", apt_title: "Nos Demeures", apt_view_all: "Voir tous →", apt_view_all_btn: "Voir tous les appartements",
+                apt_guests: "Hôtes", apt_night: "/nuit", apt_details: "Détails", apt_from: "à partir de",
+                rev_subtitle: "CE QU'ON DIT DE NOUS", rev_title: "L'Excellence Reconnue", rev_excellent: "Excellent", rev_exceptional: "Exceptionnel",
+                contact_subtitle: "Contacts", contact_title: "Venez nous rendre visite", contact_map_btn: "Ouvrir la Carte", footer_cookies: "Gérer les préférences de cookies",
+                gal_title: "Notre Domaine", gal_subtitle: "Une visite virtuelle entre nature et détente", btn_back_home: "Retour à l'Accueil",
+                gal_filter_all: "Toutes", gal_filter_int: "Intérieur", gal_filter_ext: "Extérieur", gal_filter_pool: "Piscine", gal_filter_prod: "Produits",
+                act_view_title: "Nos Activités", act_view_subtitle: "Expériences uniques au contact de la nature",
+                form_act_subtitle: "Réservez votre expérience", form_act_title: "Demande d'Information",
+                form_name: "Nom et Prénom", form_email: "E-mail", form_act_select: "Quelles activités vous intéressent?", form_participants: "Nombre de Participants", form_message: "Message ou Demandes Spéciales", form_security: "Contrôle de sécurité", form_math: "Combien font 3 + 2?", form_submit: "Envoyer la Demande",
+                dtl_desc: "Description", dtl_amenities: "Services et Confort", dtl_gallery: "Galerie Photos", dtl_click_photo: "Cliquez sur les photos pour agrandir",
+                book_req_title: "Demander un Devis", book_verify: "Vérifier la Disponibilité", book_verify_text: "Réservez directement en ligne pour garantir le meilleur tarif et une disponibilité immédiate.", book_secure: "Paiements sécurisés", book_now: "Réserver Maintenant",
+                sala_cond: "Conditions de Location:", sala_cond_text: "Le coût est de <strong class='text-olive'>15€ par personne</strong>. Une fois atteint le quota de 20 personnes (300€), le prix est bloqué et devient <strong class='text-olive'>fixe à 300€</strong> jusqu'à la capacité maximale de 60 personnes.", sala_feedback: "Total estimé:"
+            }
+        };
+
+        // --- DYNAMIC DATA STRUCTS WITH TRANSLATIONS ---
+        const apartmentsData = {
+            'tramonto': {
+                title: { it: "Appartamento Tramonto", en: "Sunset Apartment", de: "Sonnenuntergangs-Wohnung", es: "Apartamento Atardecer", fr: "Appartement Coucher de Soleil" },
+                price: "130€", // Base price handled in logic
+                desc: {
+                    it: "Situato sul lato ovest del casale, l'Appartamento Tramonto offre uno spettacolo naturale ogni sera. L'arredamento gioca sui toni caldi dell'arancio e del terracotta. Dispone di un'ampia camera matrimoniale, soggiorno con angolo cottura e una terrazza privata perfetta per l'aperitivo serale mentre il sole scende dietro le colline.",
+                    en: "Located on the west side of the farmhouse, the Sunset Apartment offers a natural spectacle every evening. The decor plays on warm tones of orange and terracotta. It features a large double bedroom, living room with kitchenette, and a private terrace perfect for evening aperitifs as the sun sets behind the hills.",
+                    de: "Auf der Westseite des Bauernhauses gelegen, bietet die Sonnenuntergangs-Wohnung jeden Abend ein Naturschauspiel. Die Einrichtung spielt mit warmen Orange- und Terrakotta-Tönen. Sie verfügt über ein großes Doppelzimmer, ein Wohnzimmer mit Kochnische und eine private Terrasse, perfekt für einen abendlichen Aperitif, während die Sonne hinter den Hügeln untergeht.",
+                    es: "Situado en el lado oeste de la casa de campo, el Apartamento Atardecer ofrece un espectáculo natural cada noche. La decoración juega con tonos cálidos de naranja y terracota. Cuenta con una amplia habitación doble, sala de estar con cocina americana y una terraza privada perfecta para el aperitivo nocturno mientras el sol se pone detrás de las colinas.",
+                    fr: "Situé du côté ouest de la ferme, l'Appartement Coucher de Soleil offre un spectacle naturel chaque soir. La décoration joue sur des tons chauds d'orange et de terre cuite. Il dispose d'une grande chambre double, d'un salon avec coin cuisine et d'une terrasse privée parfaite pour l'apéritif du soir alors que le soleil se couche derrière les collines."
+                },
+                images: [
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/ridotta%201.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/tramonto.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0608.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/phoca_thumb_l_panorama-app.tramonto_thumb.jpg",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0944.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0959.JPG"
+                ],
+                amenities: { it: ["Terrazza Ovest", "Aria Condizionata", "Wi-Fi", "Smart TV", "Angolo Cottura"], en: ["West Terrace", "Air Conditioning", "Wi-Fi", "Smart TV", "Kitchenette"], de: ["Westterrasse", "Klimaanlage", "WLAN", "Smart TV", "Kochnische"], es: ["Terraza Oeste", "Aire Acondicionado", "Wi-Fi", "Smart TV", "Cocina Americana"], fr: ["Terrasse Ouest", "Climatisation", "Wi-Fi", "Smart TV", "Coin Cuisine"] },
+                capacity: 2
+            },
+            'belvedere': {
+                title: { it: "Appartamento Belvedere", en: "Belvedere Apartment", de: "Belvedere Wohnung", es: "Apartamento Belvedere", fr: "Appartement Belvédère" },
+                price: "150€",
+                desc: {
+                    it: "Il nome dice tutto: situato al piano più alto, offre la vista più spettacolare della tenuta. Ampio e luminoso, è ideale per famiglie, con due camere da letto separate e un grande salone centrale. Le finestre incorniciano il paesaggio toscano come quadri d'autore.",
+                    en: "The name says it all: located on the highest floor, it offers the most spectacular view of the estate. Spacious and bright, it is ideal for families, with two separate bedrooms and a large central hall. The windows frame the Tuscan landscape like masterpieces.",
+                    de: "Der Name sagt alles: Im obersten Stockwerk gelegen, bietet es den spektakulärsten Blick auf das Anwesen. Geräumig und hell, ideal für Familien, mit zwei separaten Schlafzimmern und einem großen zentralen Saal. Die Fenster rahmen die toskanische Landschaft wie Meisterwerke ein.",
+                    es: "El nombre lo dice todo: situado en el piso más alto, ofrece la vista más espectacular de la finca. Amplio y luminoso, es ideal para familias, con dos dormitorios separados y un gran salón central. Las ventanas enmarcan el paisaje toscano como cuadros de autor.",
+                    fr: "Le nom dit tout : situé au dernier étage, il offre la vue la plus spectaculaire sur le domaine. Spacieux et lumineux, il est idéal pour les familles, avec deux chambres séparées et un grand salon central. Les fenêtres encadrent le paysage toscan comme des chefs-d'œuvre."
+                },
+                images: [
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/DSC_0279_0.jpg",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/DSC_0290_0.jpg",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0401.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0407.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0587_0.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0298_1.JPG"
+                ],
+                amenities: { it: ["Vista Panoramica", "2 Camere", "Ampio Salone", "Lavastoviglie", "Set Cortesia Premium"], en: ["Panoramic View", "2 Bedrooms", "Large Living Room", "Dishwasher", "Premium Amenities"], de: ["Panoramablick", "2 Schlafzimmer", "Großes Wohnzimmer", "Geschirrspüler", "Premium-Set"], es: ["Vista Panorámica", "2 Habitaciones", "Gran Salón", "Lavavajillas", "Set Cortesía Premium"], fr: ["Vue Panoramique", "2 Chambres", "Grand Salon", "Lave-vaisselle", "Set Courtoisie Premium"] },
+                capacity: 4
+            },
+            'ulivi': {
+                title: { it: "Appartamento Ulivi", en: "Olive Trees Apartment", de: "Olivenbäume Wohnung", es: "Apartamento Olivos", fr: "Appartement Oliviers" },
+                price: "120€",
+                desc: {
+                    it: "Un rifugio di pace al piano terra, con accesso diretto agli uliveti. L'interno rispetta la tradizione contadina con pavimenti in cotto e soffitti a voltine. È la scelta perfetta per chi cerca il contatto diretto con la natura e la semplicità raffinata.",
+                    en: "A peaceful retreat on the ground floor, with direct access to the olive groves. The interior respects peasant tradition with terracotta floors and vaulted ceilings. It is the perfect choice for those seeking direct contact with nature and refined simplicity.",
+                    de: "Ein friedlicher Rückzugsort im Erdgeschoss mit direktem Zugang zu den Olivenhainen. Das Innere respektiert die bäuerliche Tradition mit Terrakottaböden und Gewölbedecken. Es ist die perfekte Wahl für diejenigen, die direkten Kontakt zur Natur und raffinierte Einfachheit suchen.",
+                    es: "Un refugio de paz en la planta baja, con acceso directo a los olivares. El interior respeta la tradición campesina con suelos de terracota y techos abovedados. Es la elección perfecta para quienes buscan contacto directo con la naturaleza y sencillez refinada.",
+                    fr: "Un refuge de paix au rez-de-chaussée, avec accès direct aux oliveraies. L'intérieur respecte la tradition paysanne avec des sols en terre cuite et des plafonds voûtés. C'est le choix parfait pour ceux qui recherchent un contact direct avec la nature et une simplicité raffinée."
+                },
+                images: [
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_1045.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_1026.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_1035.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0455.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0448.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/phoca_thumb_l_DSCN2852_thumb.jpg"
+                ],
+                amenities: { it: ["Piano Terra", "Accesso Giardino", "Animali Ammessi", "Cucina Rustica", "Wi-Fi"], en: ["Ground Floor", "Garden Access", "Pets Allowed", "Rustic Kitchen", "Wi-Fi"], de: ["Erdgeschoss", "Gartenzugang", "Haustiere erlaubt", "Rustikale Küche", "WLAN"], es: ["Planta Baja", "Acceso Jardín", "Mascotas Permitidas", "Cocina Rústica", "Wi-Fi"], fr: ["Rez-de-chaussée", "Accès Jardin", "Animaux Admis", "Cuisine Rustique", "Wi-Fi"] },
+                capacity: 3
+            },
+            'montagna': {
+                title: { it: "Appartamento Montagna", en: "Mountain View Apartment", de: "Berg Wohnung", es: "Apartamento Montaña", fr: "Appartement Montagne" },
+                price: "110€",
+                desc: {
+                    it: "Caratterizzato da muri in pietra a vista e un grande camino originale, l'Appartamento Montagna evoca l'atmosfera dei rifugi appenninici ma con il calore toscano. Accogliente e intimo, è perfetto per le fughe invernali o per chi ama le atmosfere 'cozy'.",
+                    en: "Characterized by exposed stone walls and a large original fireplace, the Mountain Apartment evokes the atmosphere of Apennine shelters but with Tuscan warmth. Cozy and intimate, it is perfect for winter escapes or those who love 'cozy' atmospheres.",
+                    de: "Gekennzeichnet durch freiliegende Steinwände und einen großen originalen Kamin, erinnert die Bergwohnung an die Atmosphäre von Appenninhütten, jedoch mit toskanischer Wärme. Gemütlich und intim, perfekt für Winterausflüge oder für Liebhaber gemütlicher Atmosphären.",
+                    es: "Caracterizado por paredes de piedra vista y una gran chimenea original, el Apartamento Montaña evoca la atmósfera de los refugios apeninos pero con la calidez toscana. Acogedor e íntimo, es perfecto para escapadas invernales o para quienes aman las atmósferas acogedoras.",
+                    fr: "Caractérisé par des murs en pierres apparentes et une grande cheminée d'origine, l'Appartement Montagne évoque l'atmosphère des refuges des Apennins mais avec la chaleur toscane. Accueillant et intime, il est parfait pour les escapades hivernales ou pour ceux qui aiment les atmosphères 'cosy'."
+                },
+                images: [
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_1021.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/app.vista%20montagna.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/phoca_thumb_l_app.montagna_thumb.jpg",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/phoca_thumb_l_appartam.montagna_thumb_0.jpg",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/phoca_thumb_l_DSCN0746_thumb.jpg",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/phoca_thumb_l_est.montagna_thumb.jpg"
+                ],
+                amenities: { it: ["Camino", "Pietra a Vista", "Ingresso Indipendente", "Riscaldamento Autonomo", "Doccia Emozionale"], en: ["Fireplace", "Exposed Stone", "Independent Entrance", "Autonomous Heating", "Emotional Shower"], de: ["Kamin", "Naturstein", "Unabhängiger Eingang", "Autonome Heizung", "Erlebnisdusche"], es: ["Chimenea", "Piedra Vista", "Entrada Independiente", "Calefacción Autónoma", "Ducha Emocional"], fr: ["Cheminée", "Pierre Apparente", "Entrée Indépendante", "Chauffage Autonome", "Douche Émotionnelle"] },
+                capacity: 2
+            },
+            'lecci': {
+                title: { it: "Appartamento Lecci", en: "Holm Oaks Apartment", de: "Steineichen Wohnung", es: "Apartamento Encinas", fr: "Appartement Chênes Verts" },
+                price: "140€",
+                desc: {
+                    it: "Protetto dalle fronde di lecci secolari, questo appartamento è il più fresco della struttura anche nelle estati più torride. Dispone di un ampio patio esterno arredato, ideale per cene all'aperto e relax pomeridiano all'ombra.",
+                    en: "Protected by the foliage of centuries-old holm oaks, this apartment is the coolest in the structure even in the hottest summers. It has a large furnished outdoor patio, ideal for outdoor dinners and afternoon relaxation in the shade.",
+                    de: "Geschützt durch das Laub jahrhundertealter Steineichen, ist diese Wohnung auch in den heißesten Sommern die kühlste der Anlage. Sie verfügt über eine große möblierte Außenterrasse, ideal für Abendessen im Freien und entspannte Nachmittage im Schatten.",
+                    es: "Protegido por el follaje de encinas centenarias, este apartamento es el más fresco de la estructura incluso en los veranos más tórridos. Dispone de un amplio patio exterior amueblado, ideal para cenas al aire libre y relajación vespertina a la sombra.",
+                    fr: "Protégé par le feuillage de chênes verts séculaires, cet appartement est le plus frais de la structure même lors des étés les plus torrides. Il dispose d'un grand patio extérieur meublé, idéal pour les dîners en plein air et la détente l'après-midi à l'ombre."
+                },
+                images: [
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0976.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0988.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_1005.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0965.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0445.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/lecci10_0.jpg"
+                ],
+                amenities: { it: ["Patio Ombreggiato", "Grande Cucina", "4 Ospiti", "Barbecue Privato", "Lavatrice"], en: ["Shaded Patio", "Large Kitchen", "4 Guests", "Private BBQ", "Washing Machine"], de: ["Schattige Terrasse", "Große Küche", "4 Gäste", "Privater Grill", "Waschmaschine"], es: ["Patio Sombreado", "Gran Cocina", "4 Huéspedes", "Barbacoa Privada", "Lavadora"], fr: ["Patio Ombragé", "Grande Cuisine", "4 Hôtes", "Barbecue Privé", "Lave-linge"] },
+                capacity: 4
+            },
+            'corbezzolo': {
+                title: { it: "Appartamento Corbezzolo", en: "Strawberry Tree Apartment", de: "Erdbeerbaum Wohnung", es: "Apartamento Madroño", fr: "Appartement Arbousier" },
+                price: "125€",
+                desc: {
+                    it: "Un nido romantico e colorato, vicino al giardino delle erbe aromatiche. L'Appartamento Corbezzolo è intimo, curato nei minimi dettagli e pervaso dai profumi della macchia mediterranea che entra dalle finestre.",
+                    en: "A romantic and colorful nest, close to the aromatic herb garden. The Corbezzolo Apartment is intimate, cared for in the smallest details, and pervaded by the scents of the Mediterranean scrub coming through the windows.",
+                    de: "Ein romantisches und farbenfrohes Nest, in der Nähe des Kräutergartens. Die Wohnung Corbezzolo ist intim, bis ins kleinste Detail gepflegt und durchdrungen von den Düften der mediterranen Macchia, die durch die Fenster dringen.",
+                    es: "Un nido romántico y colorido, cerca del jardín de hierbas aromáticas. El Apartamento Corbezzolo es íntimo, cuidado en los mínimos detalles y impregnado de los aromas del matorral mediterráneo que entran por las ventanas.",
+                    fr: "Un nid romantique et coloré, près du jardin des herbes aromatiques. L'Appartement Arbousier est intime, soigné dans les moindres détails et imprégné des parfums du maquis méditerranéen qui entrent par les fenêtres."
+                },
+                images: [
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_1005.JPG",
+                    "https://images.unsplash.com/photo-1522771753035-4a53c9d13185?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+                    "https://images.unsplash.com/photo-1595526114035-0d45ed16cfbf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1507089947368-19c1da9775ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1534349762230-e0cadf78f5da?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ],
+                amenities: { it: ["Giardino Aromatico", "Letto King Size", "Macchina Caffè", "Smart TV", "Minibar"], en: ["Aromatic Garden", "King Size Bed", "Coffee Machine", "Smart TV", "Minibar"], de: ["Kräutergarten", "Kingsize-Bett", "Kaffeemaschine", "Smart TV", "Minibar"], es: ["Jardín Aromático", "Cama King Size", "Máquina de Café", "Smart TV", "Minibar"], fr: ["Jardin Aromatique", "Lit King Size", "Machine à Café", "Smart TV", "Minibar"] },
+                capacity: 2
+            },
+            'sala': {
+                title: { it: "Sala Multifunzionale", en: "Multipurpose Hall", de: "Mehrzwecksaal", es: "Sala Multifuncional", fr: "Salle Polyvalente" },
+                price: "15€",
+                priceUnit: { it: "/persona", en: "/person", de: "/Person", es: "/persona", fr: "/personne" },
+                desc: {
+                    it: "Un ampio spazio versatile immerso nel verde, perfetto per ospitare corsi di formazione, ritiri yoga, riunioni aziendali o banchetti privati. La sala è dotata di tutte le tecnologie necessarie e può essere configurata secondo le vostre esigenze.",
+                    en: "A large versatile space immersed in greenery, perfect for hosting training courses, yoga retreats, business meetings, or private banquets. The hall is equipped with all necessary technologies and can be configured according to your needs.",
+                    de: "Ein großer, vielseitiger Raum im Grünen, perfekt für Schulungen, Yoga-Retreats, Geschäftstreffen oder private Bankette. Der Saal ist mit allen notwendigen Technologien ausgestattet und kann nach Ihren Bedürfnissen konfiguriert werden.",
+                    es: "Un amplio espacio versátil inmerso en el verde, perfecto para albergar cursos de formación, retiros de yoga, reuniones de empresa o banquetes privados. La sala está equipada con todas las tecnologías necesarias y se puede configurar según sus necesidades.",
+                    fr: "Un grand espace polyvalent immergé dans la verdure, parfait pour accueillir des formations, des retraites de yoga, des réunions d'affaires ou des banquets privés. La salle est équipée de toutes les technologies nécessaires et peut être configurée selon vos besoins."
+                },
+                images: [
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/phoca_thumb_l_DSCN0785_800.jpg",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0493.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0498_0.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0503_0.JPG",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/tramonto_big1.jpg",
+                    "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/phoca_thumb_l_DSCN0776_800.jpg"
+                ],
+                amenities: { it: ["Proiettore HD", "Impianto Audio", "Wi-Fi Fibra", "Tavoli Modulabili", "Sedie per 60 pax", "Catering su richiesta", "Luce Naturale", "Accesso Disabili"], en: ["HD Projector", "Audio System", "Fiber Wi-Fi", "Modular Tables", "Chairs for 60", "Catering on request", "Natural Light", "Disabled Access"], de: ["HD-Projektor", "Audiosystem", "Glasfaser-WLAN", "Modulare Tische", "Stühle für 60", "Catering auf Anfrage", "Tageslicht", "Barrierefrei"], es: ["Proyector HD", "Sistema de Audio", "Wi-Fi Fibra", "Mesas Modulares", "Sillas para 60", "Catering bajo petición", "Luz Natural", "Acceso Discapacitados"], fr: ["Projecteur HD", "Système Audio", "Wi-Fi Fibre", "Tables Modulables", "Chaises pour 60", "Traiteur sur demande", "Lumière Naturelle", "Accès Handicapés"] },
+                capacity: 60
+            }
+        };
+
+        const activitiesPageData = [
+            {
+                id: "Pastore",
+                title: { it: "Una Giornata da Pastore", en: "A Day as a Shepherd", de: "Ein Tag als Schäfer", es: "Un Día como Pastor", fr: "Une Journée de Berger" },
+                desc: {
+                    it: "Un'esperienza autentica e formativa per grandi e piccini. Accompagnerete il nostro pastore durante la sua giornata tipo: dalla cura del gregge alla mungitura, scoprendo i segreti di un mestiere antico che segue i ritmi della natura. Imparerete a riconoscere le erbe spontanee di cui si nutrono le pecore e assisterete al processo di trasformazione del latte.",
+                    en: "An authentic and educational experience for young and old. You will accompany our shepherd during his typical day: from tending the flock to milking, discovering the secrets of an ancient trade that follows the rhythms of nature. You will learn to recognize the wild herbs that sheep feed on and witness the milk transformation process.",
+                    de: "Ein authentisches und lehrreiches Erlebnis für Groß und Klein. Sie begleiten unseren Schäfer bei seinem typischen Tag: von der Pflege der Herde bis zum Melken, und entdecken die Geheimnisse eines alten Handwerks, das dem Rhythmus der Natur folgt.",
+                    es: "Una experiencia auténtica y educativa para grandes y pequeños. Acompañarás a nuestro pastor durante su día típico: desde el cuidado del rebaño hasta el ordeño, descubriendo los secretos de un oficio antiguo que sigue los ritmos de la naturaleza.",
+                    fr: "Une expérience authentique et éducative pour petits et grands. Vous accompagnerez notre berger lors de sa journée type : du soin du troupeau à la traite, en découvrant les secrets d'un métier ancien qui suit les rythmes de la nature."
+                },
+                images: [
+                    "https://images.unsplash.com/photo-1484557985045-6f550bf43e65?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1516467508483-a7212febe31a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1506935336592-3e289437b670?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+            {
+                id: "Trekking",
+                title: { it: "Escursioni e Trekking", en: "Excursions & Trekking", de: "Wandern & Trekking", es: "Excursiones y Trekking", fr: "Excursions et Trekking" },
+                desc: {
+                    it: "I dintorni dell'Agriturismo Bellavista offrono una rete di sentieri incantevoli. Organizziamo escursioni guidate di vari livelli di difficoltà, dalle passeggiate rilassanti tra gli oliveti ai percorsi più impegnativi verso le vette circostanti. Le nostre guide esperte vi racconteranno la storia e la geologia del territorio, mostrandovi scorci panoramici indimenticabili, specialmente al tramonto.",
+                    en: "The surroundings of Agriturismo Bellavista offer a network of enchanting trails. We organize guided excursions of various difficulty levels, from relaxing walks among olive groves to more challenging routes towards surrounding peaks.",
+                    de: "Die Umgebung des Agriturismo Bellavista bietet ein Netz von bezaubernden Wegen. Wir organisieren geführte Wanderungen verschiedener Schwierigkeitsgrade, von entspannenden Spaziergängen zwischen Olivenhainen bis hin zu anspruchsvolleren Routen zu den umliegenden Gipfeln.",
+                    es: "Los alrededores del Agriturismo Bellavista ofrecen una red de senderos encantadores. Organizamos excursiones guiadas de varios niveles de dificultad, desde paseos relajantes entre olivares hasta rutas más exigentes hacia las cumbres circundantes.",
+                    fr: "Les environs de l'Agriturismo Bellavista offrent un réseau de sentiers enchanteurs. Nous organisons des excursions guidées de différents niveaux de difficulté, des promenades relaxantes parmi les oliviers aux itinéraires plus exigeants vers les sommets environnants."
+                },
+                images: [
+                    "https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1501555088652-021faa106b9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+            {
+                id: "Degustazioni",
+                title: { it: "Degustazioni", en: "Tastings", de: "Verkostungen", es: "Degustaciones", fr: "Dégustations" },
+                desc: {
+                    it: "Un viaggio sensoriale attraverso i sapori autentici della Toscana. Nella nostra cantina o all'ombra del patio, potrete degustare una selezione dei migliori vini locali accompagnati da taglieri di salumi tipici, formaggi pecorini di varia stagionatura e il nostro olio extravergine d'oliva.",
+                    en: "A sensory journey through the authentic flavors of Tuscany. In our cellar or in the shade of the patio, you can taste a selection of the best local wines accompanied by platters of typical cured meats, pecorino cheeses of various aging, and our extra virgin olive oil.",
+                    de: "Eine sensorische Reise durch die authentischen Aromen der Toskana. In unserem Keller oder im Schatten der Terrasse können Sie eine Auswahl der besten lokalen Weine verkosten, begleitet von Platten mit typischen Wurstwaren, Pecorino-Käse verschiedener Reifegrade und unserem nativen Olivenöl extra.",
+                    es: "Un viaje sensorial a través de los sabores auténticos de la Toscana. En nuestra bodega o a la sombra del patio, podrán degustar una selección de los mejores vinos locales acompañados de tablas de embutidos típicos, quesos pecorino de variada maduración y nuestro aceite de oliva virgen extra.",
+                    fr: "Un voyage sensoriel à travers les saveurs authentiques de la Toscane. Dans notre cave ou à l'ombre du patio, vous pourrez déguster une sélection des meilleurs vins locaux accompagnés de plateaux de charcuterie typique, de fromages pecorino de différents affinages et de notre huile d'olive extra vierge."
+                },
+                images: [
+                    "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1528823872057-9c0182e68453?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+            {
+                id: "Animali",
+                title: { it: "Animali (Pony & Ciuchini)", en: "Animals (Ponies & Donkeys)", de: "Tiere (Ponys & Esel)", es: "Animales (Ponis y Burros)", fr: "Animaux (Poneys & Ânes)" },
+                desc: {
+                    it: "Il cuore pulsante della nostra fattoria didattica. I nostri amici a quattro zampe, pony e asinelli (ciuchini), sono abituati al contatto umano e aspettano solo di essere coccolati. È un'attività perfetta per i bambini, che possono imparare a spazzolarli e prendersi cura di loro.",
+                    en: "The beating heart of our educational farm. Our four-legged friends, ponies and donkeys, are used to human contact and are just waiting to be cuddled. It is a perfect activity for children, who can learn to brush them and take care of them.",
+                    de: "Das schlagende Herz unseres Lehrbauernhofs. Unsere vierbeinigen Freunde, Ponys und Eselchen, sind an menschlichen Kontakt gewöhnt und warten nur darauf, gekuschelt zu werden. Eine perfekte Aktivität für Kinder.",
+                    es: "El corazón palpitante de nuestra granja educativa. Nuestros amigos de cuatro patas, ponis y burritos, están acostumbrados al contacto humano y solo esperan ser mimados. Es una actividad perfecta para los niños.",
+                    fr: "Le cœur battant de notre ferme pédagogique. Nos amis à quatre pattes, poneys et ânes, sont habitués au contact humain et n'attendent que d'être câlinés. C'est une activité parfaite pour les enfants."
+                },
+                images: [
+                    "https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1535241554-2dff40430544?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ]
+            }
+        ];
+
+        // --- GLOBAL STATE ---
+        let currentLang = localStorage.getItem('siteLang') || 'it';
+        const mainGalleryImages = [
+            { src: "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/phoca_thumb_l_Copia-di-castigione-della-pescaia-080_thumb.jpg", category: "esterni" },
+            { src: "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0487.JPG", category: "esterni" },
+            { src: "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/phoca_thumb_l_DSCN4084_thumb.jpg", category: "piscina" },
+            { src: "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/phoca_thumb_l_DSCN4135_thumb.jpg", category: "piscina" },
+            { src: "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/phoca_thumb_l_DSCN4150_thumb.jpg", category: "piscina" },
+            { src: "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/phoca_thumb_l_DSCN4371_thumb.jpg", category: "piscina" },
+            { src: "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0608.JPG", category: "interni" },
+            { src: "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0313.JPG", category: "interni" },
+            { src: "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/immagini/DSC_0301.JPG", category: "prodotti" },
+            { src: "https://www.agriturismo-bellavista.it/sites/agriturismo-bellavista.it/files/phoca_thumb_l_castigione-della-pescaia-152_thumb.jpg", category: "esterni" }
+        ];
+        
+        let currentApartmentImages = [];
+        let currentImageIndex = 0;
+        let currentGalleryDisplay = mainGalleryImages;
+
+        const mainView = document.getElementById('main-view');
+        const detailView = document.getElementById('detail-view');
+        const galleryView = document.getElementById('gallery-view');
+        const activitiesView = document.getElementById('activities-view');
+
+        // --- TRANSLATION LOGIC ---
+        function changeLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('siteLang', lang);
+            
+            // Update static texts
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+
+            // Update Active Lang Button (For Mobile List)
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if(btn.getAttribute('data-lang') === lang) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+            
+            // Update Desktop Trigger Text
+            const desktopLangLabel = document.getElementById('desktop-current-lang');
+            if(desktopLangLabel) {
+                desktopLangLabel.innerText = lang.toUpperCase();
+            }
+            // Close Desktop Dropdown
+            const desktopDropdown = document.getElementById('desktop-lang-options');
+            if(desktopDropdown) {
+                desktopDropdown.classList.add('hidden');
+            }
+
+            // Re-render Dynamic Content
+            renderApartmentsHome();
+            renderActivitiesHome();
+            // If in activities view, re-render that too
+            if(!activitiesView.classList.contains('view-hidden')) {
+                renderActivitiesView();
+            }
+
+            // Update Booking Links
+            const bookLinkDesktop = document.getElementById('btn-book-desktop');
+            const bookLinkMobile = document.getElementById('btn-book-mobile');
+            const newLink = `https://my.xenion.it/bellavista/paginaprenotazione?idstructure=1&lang=${lang}`;
+            if(bookLinkDesktop) bookLinkDesktop.href = newLink;
+            if(bookLinkMobile) bookLinkMobile.href = newLink;
+        }
+
+        // New function for desktop dropdown
+        function toggleDesktopLangMenu() {
+            const dropdown = document.getElementById('desktop-lang-options');
+            if(dropdown.classList.contains('hidden')) {
+                dropdown.classList.remove('hidden');
+            } else {
+                dropdown.classList.add('hidden');
+            }
+        }
+        
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('desktop-lang-options');
+            const trigger = document.getElementById('desktop-lang-trigger');
+            if (dropdown && !dropdown.classList.contains('hidden')) {
+                 if (!trigger.contains(e.target) && !dropdown.contains(e.target)) {
+                    dropdown.classList.add('hidden');
+                 }
+            }
+        });
+
+        // Initialize Lang
+        document.addEventListener('DOMContentLoaded', () => {
+            changeLanguage(currentLang);
+        });
+
+        // --- RENDER FUNCTIONS ---
+        function renderApartmentsHome() {
+            const grid = document.getElementById('apartments-grid');
+            if(!grid) return;
+            grid.innerHTML = '';
+            
+            // Order of keys to match original design flow
+            const aptKeys = ['tramonto', 'belvedere', 'ulivi', 'montagna', 'lecci', 'corbezzolo', 'sala'];
+            
+            aptKeys.forEach(key => {
+                const data = apartmentsData[key];
+                const title = data.title[currentLang];
+                // Short desc for card (first sentence or custom truncated) - Just taking translations[lang].apt_details usually
+                // Here we use data.desc[currentLang] but truncated
+                const desc = data.desc[currentLang].split('.')[0] + '.'; 
+                const priceLabel = key === 'sala' ? translations[currentLang].apt_from + " " + data.price + data.priceUnit[currentLang] : translations[currentLang].apt_from + " " + data.price + translations[currentLang].apt_night;
+                const guestLabel = key === 'sala' ? 'Eventi' : data.capacity + " " + translations[currentLang].apt_guests;
+                const guestBg = key === 'sala' ? 'bg-olive text-white' : 'bg-white text-olive';
+
+                const div = document.createElement('div');
+                div.className = "group bg-white shadow-md hover:shadow-2xl transition-all duration-300";
+                div.innerHTML = `
+                    <div class="overflow-hidden relative h-64">
+                        <img src="${data.images[0]}" alt="${title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute bottom-0 left-0 ${guestBg} px-4 py-2 text-xs lg:text-sm font-bold tracking-widest uppercase">${guestLabel}</div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl lg:text-3xl font-serif text-olive-dark mb-2">${title}</h3>
+                        <p class="text-gray-500 text-sm lg:text-base mb-4">${desc}</p>
+                        <div class="flex justify-between items-center border-t border-gray-100 pt-4">
+                            <span class="text-lg lg:text-xl font-serif text-gray-700">${priceLabel}</span>
+                            <button onclick="openApartment('${key}')" class="text-terra hover:text-olive text-sm lg:text-base font-bold uppercase tracking-wider">${translations[currentLang].apt_details}</button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(div);
+            });
+        }
+
+        function renderActivitiesHome() {
+            const grid = document.getElementById('home-activities-grid');
+            if(!grid) return;
+            grid.innerHTML = '';
+
+            const icons = {
+                'Pastore': `<svg class="svg-icon w-16 h-16 text-olive transition-all duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path class="svg-path-draw" d="M8 12a3 3 0 1 0-6 0 3 3 0 0 0 6 0Z" /><path class="svg-path-draw" d="M8 12c0-4 2-7 6-7s6 3 6 7v1c0 3-2 5-5 5h-4" /><path class="svg-path-draw" d="M11 18v4" /><path class="svg-path-draw" d="M17 18v4" /><path class="svg-path-draw" d="M2.5 9.5L1 8" /></svg>`,
+                'Trekking': `<svg class="svg-icon w-16 h-16 text-olive transition-all duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path class="svg-path-draw" d="M12 4c1.5 0 3 .5 3 2s-1.5 2-1.5 3.5c0 1.5 2 2 2 3.5s-1.5 3-3.5 3-4-1.5-4-3 1.5-2 1.5-3.5-1.5-2-1.5-3.5 1.5-2 4-2z" /><path d="M12 16v6" /><path class="group-hover:translate-x-1 transition-transform duration-700" d="M8 22h8" /></svg>`,
+                'Degustazioni': `<svg class="svg-icon w-16 h-16 text-olive transition-all duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path class="svg-path-draw" d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /><path d="M7 2v20" /><path class="svg-path-draw" d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" /></svg>`,
+                'Animali': `<svg class="svg-icon w-16 h-16 text-olive transition-all duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path class="svg-path-draw" d="M12 14c-2.5 0-4 1.5-4 4s1.5 4 4 4 4-1.5 4-4-1.5-4-4-4z" /><path class="svg-path-draw" d="M12 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" /><path class="svg-path-draw" d="M6.5 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" /><path class="svg-path-draw" d="M17.5 10a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" /><path class="svg-path-draw" d="M4 16a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" /><path class="svg-path-draw" d="M20 16a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" /></svg>`
+            };
+
+            const mapping = [
+                {id: "Pastore", transKeyTitle: "act_card_shepherd_title", transKeyDesc: "act_card_shepherd_desc"},
+                {id: "Trekking", transKeyTitle: "act_card_trek_title", transKeyDesc: "act_card_trek_desc"},
+                {id: "Degustazioni", transKeyTitle: "act_card_tasting_title", transKeyDesc: "act_card_tasting_desc"},
+                {id: "Animali", transKeyTitle: "act_card_animals_title", transKeyDesc: "act_card_animals_desc"}
+            ];
+
+            mapping.forEach(map => {
+                const div = document.createElement('div');
+                div.className = "activity-card group bg-stone-custom p-10 rounded-sm border border-gray-100 text-center hover:shadow-xl transition-all duration-500 cursor-pointer";
+                div.onclick = showActivities;
+                div.innerHTML = `
+                    <div class="h-24 flex items-center justify-center mb-6">
+                        ${icons[map.id]}
+                    </div>
+                    <h3 class="text-2xl lg:text-3xl font-serif text-olive-dark mb-4 group-hover:text-terra transition-colors">${translations[currentLang][map.transKeyTitle]}</h3>
+                    <p class="text-gray-600 text-sm lg:text-base leading-relaxed">
+                        ${translations[currentLang][map.transKeyDesc]}
+                    </p>
+                `;
+                grid.appendChild(div);
+            });
+        }
+
+        // --- CORE FUNCTIONS (Updated for Translation) ---
+        function updateSalaPrice(value) {
+            const people = parseInt(value);
+            const feedback = document.getElementById('sala-price-feedback');
+            
+            if (!people || people < 0) {
+                feedback.innerText = translations[currentLang].sala_feedback + " 0€";
+                return;
+            }
+            
+            let price = people * 15;
+            if (price > 300) price = 300;
+            
+            feedback.innerText = translations[currentLang].sala_feedback + " " + price + "€";
+        }
+
+        function openApartment(id) {
+            const data = apartmentsData[id];
+            if(!data) return;
+            currentApartmentImages = data.images;
+            document.getElementById('detail-title').innerText = data.title[currentLang];
+            
+            const priceLabel = id === 'sala' ? translations[currentLang].apt_from + " " + data.price + data.priceUnit[currentLang] : translations[currentLang].apt_from + " " + data.price + translations[currentLang].apt_night;
+            document.getElementById('detail-price').innerText = priceLabel;
+            
+            document.getElementById('detail-desc').innerText = data.desc[currentLang];
+            document.getElementById('detail-hero').src = data.images[0];
+            
+            const galleryGrid = document.getElementById('gallery-grid');
+            galleryGrid.innerHTML = '';
+            data.images.forEach((imgSrc, index) => {
+                const imgContainer = document.createElement('div');
+                imgContainer.className = "w-full h-full overflow-hidden rounded-sm shadow-lg";
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.className = "w-full h-full object-cover cursor-pointer hover:opacity-90 transition-opacity hover:scale-105 duration-500";
+                img.onclick = () => openLightbox(index);
+                imgContainer.appendChild(img);
+                galleryGrid.appendChild(imgContainer);
+            });
+            const amenContainer = document.getElementById('detail-amenities');
+            amenContainer.innerHTML = '';
+            
+            data.amenities[currentLang].forEach(am => {
+                const div = document.createElement('div');
+                div.className = "flex items-center gap-2 text-sm text-gray-600";
+                div.innerHTML = `<svg class="w-4 h-4 text-olive" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> ${am}`;
+                amenContainer.appendChild(div);
+            });
+            const bookingSidebar = document.getElementById('booking-sidebar-content');
+            if (id === 'sala') {
+                bookingSidebar.innerHTML = `
+                    <span class="text-sm lg:text-base text-gray-500 uppercase tracking-wider">${translations[currentLang].book_req_title}</span>
+                    <h3 class="text-2xl lg:text-3xl font-serif text-olive-dark mt-2 mb-4">${data.title[currentLang]}</h3>
+                    <div class="bg-gray-50 p-4 rounded mb-6 text-left border-l-4 border-terra">
+                        <p class="text-sm text-gray-600 mb-2 font-bold">${translations[currentLang].sala_cond}</p>
+                        <p class="text-sm text-gray-600 leading-relaxed">${translations[currentLang].sala_cond_text}</p>
+                    </div>
+                    <form onsubmit="sendSalaRequest(event)" class="space-y-4 text-left">
+                        <div class="hidden" style="display:none;"><label>...</label><input type="text" name="honeypot_field" tabindex="-1" autocomplete="off"></div>
+                        <div><label class="block text-xs uppercase font-bold text-gray-500 mb-1">${translations[currentLang].form_name}</label><input type="text" name="nome" class="w-full border border-gray-300 p-3 rounded-sm focus:ring-olive focus:border-olive focus:outline-none bg-white text-gray-700" required placeholder="Mario Rossi"></div>
+                        <div><label class="block text-xs uppercase font-bold text-gray-500 mb-1">${translations[currentLang].form_email}</label><input type="email" name="email" class="w-full border border-gray-300 p-3 rounded-sm focus:ring-olive focus:border-olive focus:outline-none bg-white text-gray-700" required placeholder="mario@email.com"></div>
+                        <div><label class="block text-xs uppercase font-bold text-gray-500 mb-1">${translations[currentLang].form_participants}</label><input type="number" name="persone" min="1" max="60" class="w-full border border-gray-300 p-3 rounded-sm focus:ring-olive focus:border-olive focus:outline-none bg-white text-gray-700" required placeholder="es. 25" oninput="updateSalaPrice(this.value)"><div id="sala-price-feedback" class="text-right font-bold text-olive mt-1 text-sm">${translations[currentLang].sala_feedback} 0€</div></div>
+                        <div><label class="block text-xs uppercase font-bold text-gray-500 mb-1">${translations[currentLang].form_message}</label><textarea name="dettagli" rows="3" class="w-full border border-gray-300 p-3 rounded-sm focus:ring-olive focus:border-olive focus:outline-none bg-white text-gray-700"></textarea></div>
+                        <div class="pt-2 border-t border-gray-100"><label class="block text-xs uppercase font-bold text-olive mb-1">${translations[currentLang].form_security}</label><div class="flex items-center gap-3"><span class="text-gray-600 font-bold">${translations[currentLang].form_math}</span><input type="number" name="captcha" class="w-20 border border-gray-300 p-2 rounded-sm focus:ring-olive focus:border-olive text-center" required></div></div>
+                        <button type="submit" class="block w-full bg-olive text-white py-4 font-bold uppercase tracking-widest hover:bg-olive-dark transition-colors rounded-sm shadow-md hover:shadow-lg mt-6 transform hover:-translate-y-1 duration-300">${translations[currentLang].form_submit}</button>
+                    </form>`;
+            } else {
+                bookingSidebar.innerHTML = `
+                    <span class="text-sm lg:text-base text-gray-500 uppercase tracking-wider">${translations[currentLang].book_verify}</span>
+                    <h3 class="text-2xl lg:text-3xl font-serif text-olive-dark mt-2 mb-6">${data.title[currentLang]}</h3>
+                    <p class="text-gray-600 mb-8 text-sm lg:text-base leading-relaxed">${translations[currentLang].book_verify_text}</p>
+                    <a href="https://my.xenion.it/bellavista/paginaprenotazione?idstructure=1&lang=${currentLang}" target="_blank" class="block w-full bg-olive text-white py-4 font-bold uppercase tracking-widest hover:bg-olive-dark transition-colors rounded-sm shadow-md hover:shadow-lg transform hover:-translate-y-1 duration-300 text-base lg:text-lg">${translations[currentLang].book_now}</a>
+                    <div class="mt-6 flex justify-center gap-4 text-gray-400"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg><span class="text-xs lg:text-sm">${translations[currentLang].book_secure}</span></div>`;
+            }
+            mainView.classList.add('view-hidden');
+            mainView.classList.remove('view-visible');
+            detailView.classList.remove('view-hidden');
+            detailView.classList.add('view-visible');
+            activitiesView.classList.add('view-hidden');
+            activitiesView.classList.remove('view-visible');
+            window.scrollTo(0,0);
+            window.dispatchEvent(new Event('scroll'));
+        }
+
+        function showActivities() {
+            mainView.classList.add('view-hidden');
+            mainView.classList.remove('view-visible');
+            detailView.classList.add('view-hidden');
+            detailView.classList.remove('view-visible');
+            galleryView.classList.add('view-hidden');
+            galleryView.classList.remove('view-visible');
+            activitiesView.classList.remove('view-hidden');
+            activitiesView.classList.add('view-visible');
+            window.scrollTo(0,0);
+            window.dispatchEvent(new Event('scroll'));
+            
+            renderActivitiesView();
+        }
+
+        function renderActivitiesView() {
+            const container = document.getElementById('activity-list-container');
+            container.innerHTML = '';
+
+            activitiesPageData.forEach((act, actIndex) => {
+                const isEven = actIndex % 2 === 0;
+                
+                const section = document.createElement('div');
+                section.className = `flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center`;
+                
+                const textDiv = document.createElement('div');
+                textDiv.className = "lg:w-1/2";
+                textDiv.innerHTML = `
+                    <h3 class="text-3xl font-serif text-olive-dark mb-6">${act.title[currentLang]}</h3>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-8">${act.desc[currentLang]}</p>
+                `;
+
+                const galleryDiv = document.createElement('div');
+                galleryDiv.className = "lg:w-1/2 grid grid-cols-2 gap-4";
+                
+                act.images.slice(0,2).forEach((imgSrc, imgIndex) => {
+                    const imgContainer = document.createElement('div');
+                    imgContainer.className = "h-64 rounded-sm overflow-hidden shadow-lg cursor-pointer hover:opacity-90 transition-opacity";
+                    imgContainer.onclick = () => openActivityLightbox(actIndex, imgIndex);
+                    
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    img.className = "w-full h-full object-cover transform hover:scale-105 transition-transform duration-500";
+                    imgContainer.appendChild(img);
+                    galleryDiv.appendChild(imgContainer);
+                });
+
+                section.appendChild(textDiv);
+                section.appendChild(galleryDiv);
+                container.appendChild(section);
+            });
+
+            // Update Checkboxes
+            const checkboxContainer = document.getElementById('activity-checkboxes');
+            checkboxContainer.innerHTML = '';
+            activitiesPageData.forEach(act => {
+                const label = document.createElement('label');
+                label.className = "checkbox-wrapper flex items-center gap-3 p-3 border border-gray-200 rounded-sm bg-white cursor-pointer hover:border-olive transition-colors";
+                label.innerHTML = `
+                    <input type="checkbox" name="activity" value="${act.id}" class="hidden peer">
+                    <div class="w-5 h-5 border-2 border-gray-300 rounded-sm flex items-center justify-center transition-colors">
+                        <svg class="w-3 h-3 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                    </div>
+                    <span class="text-gray-700">${act.title[currentLang]}</span>
+                `;
+                checkboxContainer.appendChild(label);
+            });
+        }
+
+        // ... [Remaining functions: openActivityLightbox, sendSalaRequest, sendActivityRequest, showMain, showMainAndScroll, showGallery, filterGallery, initGallery, openMainGalleryLightbox, openLightbox, closeLightbox, changeSlide, updateLightboxImage, Cookie Logic, toggleMenu, Header Scroll Logic] ...
+        // (Standard logic remains identical to previous version, just ensuring variables are in scope)
+
+        function openActivityLightbox(activityIndex, imageIndex) {
+            currentApartmentImages = activitiesPageData[activityIndex].images;
+            openLightbox(imageIndex);
+        }
+
+        function sendSalaRequest(event) {
+            event.preventDefault();
+            const form = event.target;
+            if (form.honeypot_field.value) return;
+            const captchaAns = form.captcha.value;
+            if (parseInt(captchaAns) !== 5) { alert("Risposta di sicurezza errata."); return; }
+            const nome = form.nome.value;
+            const email = form.email.value;
+            const persone = form.persone.value;
+            const dettagli = form.dettagli.value;
+            const recipient = "info@agriturismo-bellavista.it";
+            const subject = encodeURIComponent(`Richiesta Sala - ${nome}`);
+            const body = encodeURIComponent(`Nome: ${nome}\nEmail: ${email}\nPersone: ${persone}\nDettagli: ${dettagli}`);
+            const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
+            const link = document.createElement('a'); link.href = mailtoLink; document.body.appendChild(link); link.click(); document.body.removeChild(link);
+            setTimeout(() => { alert("Client di posta aperto."); form.reset(); }, 500);
+        }
+
+        function sendActivityRequest(event) {
+            event.preventDefault();
+            const form = event.target;
+            if (form.honeypot_field.value) return;
+            const captchaAns = form.captcha.value;
+            if (parseInt(captchaAns) !== 5) { alert("Risposta di sicurezza errata."); return; }
+            const nome = form.nome.value;
+            const email = form.email.value;
+            const partecipanti = form.partecipanti.value;
+            const messaggio = form.messaggio.value;
+            const selectedActivities = [];
+            form.querySelectorAll('input[name="activity"]:checked').forEach(cb => selectedActivities.push(cb.value));
+            const activitiesStr = selectedActivities.length > 0 ? selectedActivities.join(', ') : "Nessuna";
+            const recipient = "info@agriturismo-bellavista.it";
+            const subject = encodeURIComponent(`Richiesta Esperienza - ${nome}`);
+            const body = encodeURIComponent(`Nome: ${nome}\nEmail: ${email}\nAttività: ${activitiesStr}\nPartecipanti: ${partecipanti}\nMessaggio: ${messaggio}`);
+            const mailtoLink = `mailto:${recipient}?subject=${subject}&body=${body}`;
+            const link = document.createElement('a'); link.href = mailtoLink; document.body.appendChild(link); link.click(); document.body.removeChild(link);
+            setTimeout(() => { alert("Client di posta aperto."); form.reset(); }, 500);
+        }
+
+        function showMain() {
+            detailView.classList.add('view-hidden'); detailView.classList.remove('view-visible');
+            galleryView.classList.add('view-hidden'); galleryView.classList.remove('view-visible');
+            activitiesView.classList.add('view-hidden'); activitiesView.classList.remove('view-visible');
+            mainView.classList.remove('view-hidden'); mainView.classList.add('view-visible');
+            window.scrollTo(0,0);
+            window.dispatchEvent(new Event('scroll'));
+        }
+
+        function showMainAndScroll(sectionId) {
+            showMain();
+            const navLinks = document.querySelectorAll('.desktop-nav-link');
+            navLinks.forEach(link => { link.classList.remove('text-terra'); if(link.getAttribute('data-target') === sectionId) { link.classList.add('text-terra'); } });
+            setTimeout(() => { const element = document.getElementById(sectionId); if(element) element.scrollIntoView({behavior: 'smooth'}); }, 100);
+        }
+
+        function showGallery() {
+            mainView.classList.add('view-hidden'); mainView.classList.remove('view-visible');
+            detailView.classList.add('view-hidden'); detailView.classList.remove('view-visible');
+            activitiesView.classList.add('view-hidden'); activitiesView.classList.remove('view-visible');
+            galleryView.classList.remove('view-hidden'); galleryView.classList.add('view-visible');
+            window.scrollTo(0,0);
+            window.dispatchEvent(new Event('scroll'));
+            document.querySelectorAll('.desktop-nav-link').forEach(l => l.classList.remove('text-terra'));
+            const galleryBtn = document.getElementById('nav-gallery'); if(galleryBtn) galleryBtn.classList.add('text-terra');
+            filterGallery('all');
+        }
+
+        function filterGallery(category, btnElement) {
+            if(btnElement) {
+                document.querySelectorAll('.gallery-filter-btn').forEach(btn => { btn.classList.remove('bg-olive', 'text-white'); btn.classList.add('bg-white', 'text-gray-600'); });
+                btnElement.classList.remove('bg-white', 'text-gray-600'); btnElement.classList.add('bg-olive', 'text-white');
+            } else {
+                 document.querySelectorAll('.gallery-filter-btn').forEach(btn => { btn.classList.remove('bg-olive', 'text-white'); btn.classList.add('bg-white', 'text-gray-600'); });
+                 document.querySelector('.gallery-filter-btn').classList.remove('bg-white', 'text-gray-600'); document.querySelector('.gallery-filter-btn').classList.add('bg-olive', 'text-white');
+            }
+            if (category === 'all') currentGalleryDisplay = mainGalleryImages;
+            else currentGalleryDisplay = mainGalleryImages.filter(item => item.category === category);
+            initGallery(currentGalleryDisplay);
+        }
+
+        function initGallery(items) {
+            const grid = document.getElementById('main-gallery-grid');
+            grid.innerHTML = '';
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('reveal-visible'); observer.unobserve(entry.target); } });
+            }, { threshold: 0.1 });
+            items.forEach((item, index) => {
+                let colSpanClass = ""; let heightClass = "h-80";
+                if (index % 6 === 1) heightClass = "h-96 md:row-span-2"; 
+                if (index % 6 === 5) colSpanClass = "md:col-span-2 h-64";
+                const itemDiv = document.createElement('div');
+                itemDiv.className = `reveal-item gallery-item group relative overflow-hidden rounded-sm ${heightClass} ${colSpanClass} cursor-pointer`;
+                itemDiv.onclick = () => openMainGalleryLightbox(index);
+                itemDiv.innerHTML = `<img src="${item.src}" alt="Galleria ${index}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"><div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center"><svg class="w-10 h-10 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-50 group-hover:scale-100" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path></svg></div>`;
+                grid.appendChild(itemDiv); observer.observe(itemDiv);
+            });
+        }
+
+        function openMainGalleryLightbox(index) { currentApartmentImages = currentGalleryDisplay.map(item => item.src); openLightbox(index); }
+        function openLightbox(index) { currentImageIndex = index; updateLightboxImage(); document.getElementById('lightbox-modal').classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
+        function closeLightbox() { document.getElementById('lightbox-modal').classList.add('hidden'); document.body.style.overflow = 'auto'; }
+        function changeSlide(n) { currentImageIndex += n; if (currentImageIndex >= currentApartmentImages.length) { currentImageIndex = 0; } else if (currentImageIndex < 0) { currentImageIndex = currentApartmentImages.length - 1; } updateLightboxImage(); }
+        function updateLightboxImage() { document.getElementById('lightbox-image').src = currentApartmentImages[currentImageIndex]; document.getElementById('lightbox-counter').innerText = (currentImageIndex + 1) + " / " + currentApartmentImages.length; }
+        
+        function saveCookiePreferences() { 
+            const analyticsCb = document.getElementById('pref-analytics');
+            const marketingCb = document.getElementById('pref-marketing');
+            const prefs = { 
+                technical: true, 
+                analytics: analyticsCb ? analyticsCb.checked : false, 
+                marketing: marketingCb ? marketingCb.checked : false 
+            }; 
+            localStorage.setItem('cookiePreferences', JSON.stringify(prefs)); 
+            const banner = document.getElementById('cookie-banner');
+            if(banner) banner.classList.add('hidden'); 
+            closeModal('cookie-modal'); 
+        }
+        function resetCookies() { localStorage.removeItem('cookiePreferences'); location.reload(); }
+        function acceptAllCookies() {
+            const allPrefs = { technical: true, analytics: true, marketing: true };
+            localStorage.setItem('cookiePreferences', JSON.stringify(allPrefs));
+            
+            const analyticsCb = document.getElementById('pref-analytics');
+            const marketingCb = document.getElementById('pref-marketing');
+            if(analyticsCb) analyticsCb.checked = true;
+            if(marketingCb) marketingCb.checked = true;
+            
+            const banner = document.getElementById('cookie-banner');
+            if(banner) banner.classList.add('hidden');
+            closeModal('cookie-modal');
+        }
+
+        function rejectAllCookies() {
+            const minimalPrefs = { technical: true, analytics: false, marketing: false };
+            localStorage.setItem('cookiePreferences', JSON.stringify(minimalPrefs));
+            
+            const analyticsCb = document.getElementById('pref-analytics');
+            const marketingCb = document.getElementById('pref-marketing');
+            if(analyticsCb) analyticsCb.checked = false;
+            if(marketingCb) marketingCb.checked = false;
+
+            const banner = document.getElementById('cookie-banner');
+            if(banner) banner.classList.add('hidden');
+        }
+
+        // Updated openModal function with safety check
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error("Modal not found: " + modalId);
+            }
+        }
+
+        // Updated closeModal function with safety check
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        function toggleMenu() {
+            const isHidden = menu.classList.contains('mobile-menu-enter');
+            if (isHidden) {
+                menu.classList.remove('mobile-menu-enter'); menu.classList.add('mobile-menu-active'); document.body.style.overflow = 'hidden';
+                btn.innerHTML = '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>'; btn.style.color = '#556b2f';
+            } else {
+                menu.classList.add('mobile-menu-enter'); menu.classList.remove('mobile-menu-active'); document.body.style.overflow = 'auto';
+                btn.innerHTML = '<svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>';
+                if(window.scrollY < 50) { btn.style.color = 'white'; } else { btn.style.color = '#556b2f'; }
+            }
+        }
+        btn.addEventListener('click', toggleMenu);
+        mobileLinks.forEach(link => { link.addEventListener('click', toggleMenu); });
+        const header = document.getElementById('main-header');
+        const desktopNavLinks = document.querySelectorAll('.desktop-nav-link');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { header.classList.add('scrolled'); header.classList.remove('text-white'); header.classList.add('text-olive-dark'); if (menu.classList.contains('mobile-menu-enter')) { btn.style.color = '#556b2f'; } }
+            else { header.classList.remove('scrolled'); header.classList.add('text-white'); header.classList.remove('text-olive-dark'); if (menu.classList.contains('mobile-menu-enter')) { btn.style.color = 'white'; } }
+
+            if (!activitiesView.classList.contains('view-hidden')) { desktopNavLinks.forEach(link => link.classList.remove('text-terra')); const actBtn = document.getElementById('nav-attivita'); if(actBtn) actBtn.classList.add('text-terra'); return; }
+            if (mainView.classList.contains('view-hidden')) return;
+            
+            const sections = ['home', 'chi-siamo', 'attivita', 'appartamenti', 'dove-siamo'];
+            let current = '';
+            sections.forEach(sectionId => { const section = document.getElementById(sectionId); if (section) { const sectionTop = section.offsetTop; if (window.scrollY >= (sectionTop - 150)) { current = sectionId; } } });
+            if ((window.innerHeight + Math.round(window.scrollY)) >= document.body.scrollHeight - 50) { current = 'dove-siamo'; }
+            desktopNavLinks.forEach(link => { link.classList.remove('text-terra'); if (link.getAttribute('data-target') === current) { link.classList.add('text-terra'); } });
+            const galleryBtn = document.getElementById('nav-gallery'); if(galleryBtn) galleryBtn.classList.remove('text-terra');
+        });
+        
+        window.onclick = function(event) { if (event.target.classList.contains('modal-bg') || event.target.id === 'lightbox-modal') { if (event.target.id === 'lightbox-modal') { closeLightbox(); } else { event.target.classList.add('hidden'); document.body.style.overflow = 'auto'; } } }
+    </script>
+</body>
+</html>
