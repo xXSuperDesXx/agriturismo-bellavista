@@ -256,7 +256,7 @@
 
     <!-- ================= MAIN PAGE VIEW ================= -->
     <main id="main-view" class="view-visible">
-        
+        <!-- Content same as before -->
         <!-- HERO SECTION (Target: home) -->
         <section id="home" class="relative h-screen bg-gray-700 bg-hero-pattern bg-cover bg-center bg-fixed bg-no-repeat flex items-center justify-center">
             <div class="absolute inset-0 hero-overlay bg-black/30"></div>
@@ -273,7 +273,6 @@
                 </a>
             </div>
             
-            <!-- Scroll Down Indicator -->
             <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
                 <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
@@ -281,7 +280,7 @@
             </div>
         </section>
 
-        <!-- INTRO SECTION (Target: chi-siamo) -->
+        <!-- INTRO SECTION -->
         <section id="chi-siamo" class="py-20 md:py-32 bg-cream">
             <div class="container mx-auto px-6">
                 <div class="flex flex-col md:flex-row items-center gap-12">
@@ -307,9 +306,8 @@
             </div>
         </section>
 
-        <!-- ATTIVITÀ SECTION (Target: attivita) -->
+        <!-- ATTIVITÀ SECTION -->
         <section id="attivita" class="py-24 bg-white relative overflow-hidden">
-            <!-- Decorative Background -->
             <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
                 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
                     <pattern id="leaf-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
@@ -326,9 +324,8 @@
                     <p class="text-gray-500 mt-4 text-lg lg:text-xl" data-i18n="act_desc">Abbiamo curato per voi una selezione di esperienze per vivere appieno il territorio.</p>
                 </div>
 
-                <!-- Modificato grid-cols per accomodare 4 elementi (md:2, lg:4) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10" id="home-activities-grid">
-                    <!-- Activities injected via JS for translation support -->
+                    <!-- Activities injected via JS -->
                 </div>
                 
                 <div class="text-center mt-12">
@@ -337,7 +334,7 @@
             </div>
         </section>
 
-        <!-- APPARTAMENTI SECTION (Target: appartamenti) -->
+        <!-- APPARTAMENTI SECTION -->
         <section id="appartamenti" class="py-20 bg-stone-custom">
             <div class="container mx-auto px-6">
                 <div class="flex justify-between items-end mb-12">
@@ -345,7 +342,6 @@
                         <span class="text-terra text-sm lg:text-base tracking-widest uppercase font-bold" data-i18n="apt_subtitle">Soggiorno</span>
                         <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif text-olive-dark mt-2" data-i18n="apt_title">Le Nostre Dimore</h2>
                     </div>
-                    <!-- CHANGED: Link to new gallery view -->
                     <a href="javascript:showGallery()" class="hidden md:inline-block text-gray-500 hover:text-olive transition-colors text-sm lg:text-base uppercase tracking-wider cursor-pointer" data-i18n="apt_view_all">Vedi tutti →</a>
                 </div>
 
@@ -354,15 +350,13 @@
                 </div>
                 
                 <div class="text-center mt-12">
-                    <!-- CHANGED: Link to new gallery view -->
                     <a href="javascript:showGallery()" class="inline-block border-b border-olive text-olive hover:text-terra transition-colors uppercase text-sm lg:text-base tracking-widest font-bold pb-1 cursor-pointer" data-i18n="apt_view_all_btn">Vedi tutti gli appartamenti</a>
                 </div>
             </div>
         </section>
 
-        <!-- NUOVA SEZIONE RECENSIONI -->
+        <!-- RECENSIONI -->
         <section id="recensioni" class="py-16 bg-cream border-t border-gray-200 relative">
-            <!-- Decorative dots -->
             <div class="absolute top-10 left-10 w-20 h-20 bg-terra/10 rounded-full blur-2xl"></div>
             <div class="absolute bottom-10 right-10 w-32 h-32 bg-olive/10 rounded-full blur-2xl"></div>
 
@@ -371,11 +365,9 @@
                 <h2 class="text-3xl lg:text-5xl font-serif text-olive-dark mt-4 mb-12" data-i18n="rev_title">L'Eccellenza Riconosciuta</h2>
                 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                    
-                    <!-- Google -->
+                    <!-- Review Cards -->
                     <div class="group bg-white p-6 rounded-sm shadow-md hover:shadow-xl transition-all duration-300 border-b-4 border-blue-500 cursor-default">
                         <div class="h-12 mb-4 flex items-center justify-center text-blue-500">
-                            <!-- Text Logo Style -->
                             <span class="font-bold text-2xl font-sans tracking-tighter">Google</span>
                         </div>
                         <div class="flex justify-center gap-1 text-terra mb-2">
@@ -385,24 +377,19 @@
                         <p class="text-xs text-gray-400 mt-1">Google Reviews</p>
                     </div>
 
-                    <!-- TripAdvisor -->
                     <div class="group bg-white p-6 rounded-sm shadow-md hover:shadow-xl transition-all duration-300 border-b-4 border-green-500 cursor-default">
                         <div class="h-12 mb-4 flex items-center justify-center text-green-600">
-                            <!-- Text Logo Style -->
                             <span class="font-bold text-2xl font-sans tracking-tighter">TripAdvisor</span>
                         </div>
                         <div class="flex justify-center gap-1 text-green-500 mb-2">
-                            <!-- Circles for Tripadvisor style -->
                             <span class="star-anim text-xl">●</span><span class="star-anim text-xl">●</span><span class="star-anim text-xl">●</span><span class="star-anim text-xl">●</span><span class="star-anim text-xl">●</span>
                         </div>
                         <p class="font-bold text-gray-700">4.8 / 5.0</p>
                         <p class="text-xs text-gray-400 mt-1" data-i18n="rev_excellent">Eccellente</p>
                     </div>
 
-                    <!-- Booking.com -->
                     <div class="group bg-white p-6 rounded-sm shadow-md hover:shadow-xl transition-all duration-300 border-b-4 border-blue-900 cursor-default">
                         <div class="h-12 mb-4 flex items-center justify-center text-blue-900">
-                            <!-- Text Logo Style -->
                             <span class="font-bold text-2xl font-sans tracking-tighter">Booking.com</span>
                         </div>
                         <div class="flex justify-center gap-1 text-terra mb-2">
@@ -412,10 +399,8 @@
                         <p class="text-xs text-gray-400 mt-1" data-i18n="rev_exceptional">Eccezionale</p>
                     </div>
 
-                    <!-- Airbnb -->
                     <div class="group bg-white p-6 rounded-sm shadow-md hover:shadow-xl transition-all duration-300 border-b-4 border-red-500 cursor-default">
                         <div class="h-12 mb-4 flex items-center justify-center text-red-500">
-                            <!-- Text Logo Style -->
                             <span class="font-bold text-2xl font-sans tracking-tighter">airbnb</span>
                         </div>
                         <div class="flex justify-center gap-1 text-terra mb-2">
@@ -424,12 +409,11 @@
                         <p class="font-bold text-gray-700">5.0 / 5.0</p>
                         <p class="text-xs text-gray-400 mt-1">Superhost</p>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- INFO & MAP (Target: dove-siamo) -->
+        <!-- INFO & MAP -->
         <section id="dove-siamo" class="flex flex-col md:flex-row h-auto md:h-[500px]">
             <div class="md:w-1/2 bg-olive-dark text-cream p-12 md:p-20 flex flex-col justify-center text-base lg:text-lg">
                 <span class="text-terra text-sm lg:text-base tracking-widest uppercase font-bold mb-2" data-i18n="contact_subtitle">Contatti</span>
@@ -439,7 +423,6 @@
                         <svg class="w-6 h-6 text-terra shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         <span>Località Bellavista 1, <br>Seggiano (GR), Toscana</span>
                     </p>
-                    <!-- Clickable Phones with hover effect -->
                     <div class="flex flex-col gap-3">
                         <a href="tel:+393471711648" class="flex items-center gap-4 hover:text-terra transition-colors group">
                             <svg class="w-6 h-6 text-terra shrink-0 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
@@ -450,8 +433,6 @@
                             <span>+39 348 7556267</span>
                         </a>
                     </div>
-
-                    <!-- Clickable Email with hover effect -->
                     <a href="mailto:info@agriturismo-bellavista.it" class="flex items-center gap-4 hover:text-terra transition-colors group">
                         <svg class="w-6 h-6 text-terra shrink-0 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                         <span>info@agriturismo-bellavista.it</span>
@@ -459,7 +440,6 @@
                 </div>
             </div>
             <div class="md:w-1/2 h-96 md:h-auto relative bg-gray-200">
-                 <!-- Google Map Embed Updated to specific location -->
                  <iframe 
                     src="https://maps.google.com/maps?q=Agriturismo+Bellavista+Seggiano&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                     width="100%" 
@@ -470,8 +450,6 @@
                     referrerpolicy="no-referrer-when-downgrade"
                     class="w-full h-full grayscale-[0.2]">
                  </iframe>
-                 
-                 <!-- Overlay Button (pointer-events-none allows clicking the map behind the overlay) -->
                  <div class="absolute inset-0 flex items-center justify-center bg-black/10 pointer-events-none">
                      <a href="https://maps.app.goo.gl/7SqhcNXH6SN9H1VMA" target="_blank" class="pointer-events-auto bg-white text-olive font-bold py-3 px-8 shadow-lg hover:scale-105 transition-transform uppercase tracking-widest text-xs" data-i18n="contact_map_btn">Apri Mappa</a>
                  </div>
@@ -482,10 +460,9 @@
     
     <!-- ================= GALLERY VIEW ================= -->
     <section id="gallery-view" class="view-hidden w-full min-h-screen bg-cream">
-        <!-- Hero Video Header -->
+        <!-- Content same as previous -->
         <div class="relative h-[80vh] overflow-hidden">
             <video autoplay muted loop playsinline class="absolute top-0 left-0 w-full h-full object-cover">
-                <!-- Placeholder Video Source (Nature/Tuscany style) -->
                 <source src="https://www.tekeye.uk/html/images/Joren_Falls_Izu_Jap.mp4" type="video/mp4">
                 Il tuo browser non supporta il video.
             </video>
@@ -496,9 +473,7 @@
             </div>
         </div>
 
-        <!-- Gallery Content -->
         <div class="container mx-auto px-6 py-20">
-            <!-- Filter tabs (visual only for now, can be functional) -->
             <div class="flex justify-center flex-wrap gap-4 mb-12">
                 <button onclick="filterGallery('all', this)" class="gallery-filter-btn px-6 py-2 bg-olive text-white rounded-full text-sm uppercase tracking-wider transition-colors active" data-i18n="gal_filter_all">Tutte</button>
                 <button onclick="filterGallery('interni', this)" class="gallery-filter-btn px-6 py-2 bg-white border border-gray-200 text-gray-600 hover:text-olive hover:border-olive rounded-full text-sm uppercase tracking-wider transition-colors" data-i18n="gal_filter_int">Interni</button>
@@ -506,17 +481,12 @@
                 <button onclick="filterGallery('piscina', this)" class="gallery-filter-btn px-6 py-2 bg-white border border-gray-200 text-gray-600 hover:text-olive hover:border-olive rounded-full text-sm uppercase tracking-wider transition-colors" data-i18n="gal_filter_pool">Piscina</button>
                 <button onclick="filterGallery('prodotti', this)" class="gallery-filter-btn px-6 py-2 bg-white border border-gray-200 text-gray-600 hover:text-olive hover:border-olive rounded-full text-sm uppercase tracking-wider transition-colors" data-i18n="gal_filter_prod">Prodotti</button>                
             </div>
-
-            <!-- Masonry Grid with Dynamic Reveal -->
-            <div id="main-gallery-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Javascript will inject images here with animations -->
-            </div>
+            <div id="main-gallery-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
         </div>
     </section>
 
     <!-- ================= ACTIVITIES VIEW ================= -->
     <section id="activities-view" class="view-hidden bg-white min-h-screen">
-        <!-- Hero Section -->
         <div class="relative h-[60vh] bg-gray-800">
             <img src="https://images.unsplash.com/photo-1544367563-12123d8965cd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80" alt="Attività Header" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
@@ -528,7 +498,6 @@
         </div>
 
         <div class="container mx-auto px-6 py-16">
-            <!-- Back Button -->
             <div class="mb-12">
                 <button onclick="showMain()" class="flex items-center gap-2 text-olive hover:text-terra transition-colors uppercase text-xs lg:text-sm font-bold tracking-widest">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
@@ -536,12 +505,10 @@
                 </button>
             </div>
 
-            <!-- Activity List Container -->
             <div id="activity-list-container" class="space-y-24">
                 <!-- Javascript will inject activities here -->
             </div>
 
-            <!-- Contact Form -->
             <div class="mt-24 max-w-3xl mx-auto">
                 <div class="bg-stone-custom p-8 md:p-12 rounded-sm shadow-xl border border-gray-100 text-center">
                     <span class="text-sm lg:text-base text-gray-500 uppercase tracking-wider" data-i18n="form_act_subtitle">Prenota la tua esperienza</span>
@@ -595,7 +562,6 @@
 
     <!-- ================= APARTMENT DETAIL VIEW ================= -->
     <section id="detail-view" class="view-hidden bg-white min-h-screen">
-        <!-- Dynamic Content Header -->
         <div class="relative h-[50vh] md:h-[60vh] bg-gray-800">
             <img id="detail-hero" src="" alt="Hero Appartamento" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
@@ -607,8 +573,6 @@
         </div>
 
         <div class="container mx-auto px-6 py-16">
-            
-            <!-- Back Button -->
             <div class="mb-8">
                 <button onclick="showMain()" class="flex items-center gap-2 text-olive hover:text-terra transition-colors uppercase text-xs lg:text-sm font-bold tracking-widest">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
@@ -617,31 +581,20 @@
             </div>
 
             <div class="flex flex-col lg:flex-row gap-16">
-                <!-- Left: Description & Features -->
                 <div class="lg:w-2/3">
                     <h2 class="text-3xl lg:text-4xl font-serif text-olive-dark mb-6" data-i18n="dtl_desc">Descrizione</h2>
                     <p id="detail-desc" class="text-gray-600 leading-relaxed text-lg lg:text-xl mb-10"></p>
 
                     <h3 class="text-2xl lg:text-3xl font-serif text-olive-dark mb-6" data-i18n="dtl_amenities">Servizi e Comfort</h3>
-                    <div id="detail-amenities" class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12 text-sm lg:text-base">
-                        <!-- Amenities injected via JS -->
-                    </div>
+                    <div id="detail-amenities" class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12 text-sm lg:text-base"></div>
 
-                    <!-- Photo Gallery Grid -->
                     <h3 class="text-2xl lg:text-3xl font-serif text-olive-dark mb-6" data-i18n="dtl_gallery">Galleria Fotografica</h3>
                     <p class="text-sm lg:text-base text-gray-500 mb-4 italic" data-i18n="dtl_click_photo">Clicca sulle foto per ingrandirle</p>
-                    
-                    <!-- NEW GALLERY GRID CONTAINER -->
-                    <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[200px]">
-                        <!-- Images injected by JS -->
-                    </div>
+                    <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[200px]"></div>
                 </div>
 
-                <!-- Right: Booking Card or Contact Form -->
                 <div class="lg:w-1/3">
-                    <div id="booking-sidebar-content" class="bg-stone-custom p-8 rounded-sm sticky top-32 shadow-xl border border-gray-100 text-center">
-                        <!-- Content Injected via JS -->
-                    </div>
+                    <div id="booking-sidebar-content" class="bg-stone-custom p-8 rounded-sm sticky top-32 shadow-xl border border-gray-100 text-center"></div>
                 </div>
             </div>
         </div>
@@ -649,23 +602,16 @@
 
     <!-- LIGHTBOX GALLERY MODAL -->
     <div id="lightbox-modal" class="fixed inset-0 lightbox-overlay z-[100] hidden flex items-center justify-center p-4">
-        <!-- Close Button -->
         <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-4xl hover:text-terra z-[101]">&times;</button>
-        
-        <!-- Prev Button -->
         <button onclick="changeSlide(-1)" class="absolute left-4 text-white hover:text-terra z-[101]">
             <svg class="w-10 h-10 md:w-16 md:h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
         </button>
-
-        <!-- Image Container -->
         <div class="relative w-full max-w-5xl max-h-[90vh] flex items-center justify-center">
             <img id="lightbox-image" src="" class="max-w-full max-h-[85vh] object-contain shadow-2xl rounded-sm">
             <div class="absolute bottom-[-40px] text-white text-sm tracking-widest uppercase">
                 <span id="lightbox-counter">1 / 6</span>
             </div>
         </div>
-
-        <!-- Next Button -->
         <button onclick="changeSlide(1)" class="absolute right-4 text-white hover:text-terra z-[101]">
             <svg class="w-10 h-10 md:w-16 md:h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
         </button>
@@ -682,25 +628,14 @@
             </div>
             <div class="flex flex-col items-center">
                 <div class="flex space-x-6 items-center">
-                    <!-- Instagram -->
                     <a href="https://www.instagram.com/agriturismo.bellavista?igsh=NHV0ODZlczVza3Jw" target="_blank" class="text-gray-400 hover:text-terra transition-colors" aria-label="Instagram">
-                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                    </svg>
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                     </a>
-                    
-                    <!-- Facebook -->
                     <a href="https://www.facebook.com/share/19xu8pDRiM/" target="_blank" class="text-gray-400 hover:text-terra transition-colors" aria-label="Facebook">
-                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                        </svg>
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                     </a>
-
-                    <!-- TikTok -->
                     <a href="https://www.tiktok.com/@agriturismo.bellavista?_r=1&_t=ZN-91wbLROQlYE" target="_blank" class="text-gray-400 hover:text-terra transition-colors" aria-label="TikTok">
-                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
-                            <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.74-1.61.57-.96.61-2.1.61-3.17-.03-5.24-.04-10.49-.04-15.74z"/>
-                        </svg>
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.74-1.61.57-.96.61-2.1.61-3.17-.03-5.24-.04-10.49-.04-15.74z"/></svg>
                     </a>
                 </div>
                 <p class="text-[10px] text-gray-500 mt-4 max-w-xs text-center leading-tight">
@@ -898,7 +833,11 @@
                 form_name: "Vor- und Nachname", form_email: "E-Mail", form_act_select: "Welche Aktivitäten interessieren Sie?", form_participants: "Teilnehmerzahl", form_message: "Nachricht oder besondere Wünsche", form_security: "Sicherheitscheck", form_math: "Wie viel ist 3 + 2?", form_submit: "Anfrage senden",
                 dtl_desc: "Beschreibung", dtl_amenities: "Ausstattung & Komfort", dtl_gallery: "Fotogalerie", dtl_click_photo: "Fotos zum Vergrößern anklicken",
                 book_req_title: "Angebot anfordern", book_verify: "Verfügbarkeit prüfen", book_verify_text: "Buchen Sie direkt online, um den besten garantierten Tarif und sofortige Verfügbarkeit zu sichern.", book_secure: "Sichere Zahlungen", book_now: "Jetzt buchen",
-                sala_cond: "Mietbedingungen:", sala_cond_text: "Die Kosten betragen <strong class='text-olive'>15€ pro Person</strong>. Bei Erreichen von 20 Personen (300€) wird der Preis fixiert und beträgt <strong class='text-olive'>pauschal 300€</strong> bis zur maximalen Kapazität von 60 Personen.", sala_feedback: "Geschätzte Summe:"
+                sala_cond: "Mietbedingungen:", sala_cond_text: "Die Kosten betragen <strong class='text-olive'>15€ pro Person</strong>. Bei Erreichen von 20 Personen (300€) wird der Preis fixiert und beträgt <strong class='text-olive'>pauschal 300€</strong> bis zur maximalen Kapazität von 60 Personen.", sala_feedback: "Geschätzte Summe:",
+                // Cookies & Privacy
+                cookie_title: "Ihre Privatsphäre ist wichtig", cookie_text: "Wir verwenden technische Cookies, damit die Website funktioniert, und mit Ihrer Zustimmung analytische und Profiling-Cookies, um Ihre Erfahrung zu verbessern.", cookie_read_more: "Cookie-Richtlinie lesen", cookie_btn_personalize: "Anpassen", cookie_btn_reject: "Alle ablehnen", cookie_btn_accept: "Alle akzeptieren",
+                cookie_modal_title: "Cookie-Verwaltung", cookie_modal_desc: "Dieses Panel ermöglicht es Ihnen, Ihre Präferenzen bezüglich Cookies und Tracking-Technologien auszudrücken.", cookie_cat_tech: "Technische Cookies (Notwendig)", cookie_cat_tech_desc: "Diese Cookies sind für das Funktionieren der Website unerlässlich (z. B. Sitzung, Sicherheit).", cookie_cat_ana: "Analytische Cookies", cookie_cat_ana_desc: "Ermöglichen uns, Besuche und Verkehrsquellen zu zählen, um die Leistung unserer Website zu messen.", cookie_cat_mkt: "Marketing-Cookies", cookie_cat_mkt_desc: "Können von unseren Partnern gesetzt werden, um personalisierte Inhalte anzuzeigen.", cookie_btn_save: "Meine Auswahl speichern",
+                privacy_content: `<p class="font-bold">Information gemäß Art. 13 der EU-Verordnung 2016/679 (DSGVO)</p><h4 class="text-lg text-olive font-bold mt-4">1. Verantwortlicher</h4><p>Der Verantwortliche ist <strong>Agriturismo Bellavista S.r.l.</strong>, Sitz in Località Bellavista 1, 58038 Seggiano (GR). USt-IdNr. 01450190531. E-Mail: info@agriturismo-bellavista.it.</p><h4 class="text-lg text-olive font-bold mt-4">2. Art der verarbeiteten Daten</h4><ul class="list-disc pl-5 space-y-1"><li><strong>Navigationsdaten:</strong> Cookies, Nutzungsdaten.</li><li><strong>Freiwillig bereitgestellte Daten:</strong> Name, E-Mail, Telefon in Kontaktformularen.</li></ul><h4 class="text-lg text-olive font-bold mt-4">3. Zweck der Verarbeitung</h4><p>Daten werden gesammelt, um Dienste bereitzustellen, Anfragen zu beantworten und für anonyme Statistiken.</p><h4 class="text-lg text-olive font-bold mt-4">4. Rechtsgrundlage</h4><p>Die Verarbeitung basiert auf der Zustimmung des Benutzers und der Durchführung vorvertraglicher Maßnahmen.</p><h4 class="text-lg text-olive font-bold mt-4">5. Rechte der betroffenen Person</h4><p>Der Benutzer hat das Recht auf Zugang, Berichtigung, Löschung und Übertragbarkeit seiner Daten.</p>`
             },
             es: {
                 nav_home: "Inicio", nav_about: "Quiénes Somos", nav_activities: "Actividades", nav_apartments: "Apartamentos", nav_location: "Ubicación", nav_gallery: "Galería", nav_contacts: "Contactos", nav_book: "Reservar",
@@ -922,7 +861,11 @@
                 form_name: "Nombre y Apellido", form_email: "Correo electrónico", form_act_select: "¿Qué actividades te interesan?", form_participants: "Número de Participantes", form_message: "Mensaje o Solicitudes Especiales", form_security: "Control de seguridad", form_math: "¿Cuánto es 3 + 2?", form_submit: "Enviar Solicitud",
                 dtl_desc: "Descripción", dtl_amenities: "Servicios y Confort", dtl_gallery: "Galería Fotográfica", dtl_click_photo: "Haz clic en las fotos para ampliar",
                 book_req_title: "Solicitar Presupuesto", book_verify: "Verificar Disponibilidad", book_verify_text: "Reserva directamente online para asegurar la mejor tarifa garantizada y disponibilidad inmediata.", book_secure: "Pagos seguros", book_now: "Reservar Ahora",
-                sala_cond: "Condiciones de Alquiler:", sala_cond_text: "El costo es de <strong class='text-olive'>15€ por persona</strong>. Al llegar a 20 personas (300€), el precio se bloquea y se vuelve <strong class='text-olive'>fijo en 300€</strong> hasta la capacidad máxima de 60 personas.", sala_feedback: "Total estimado:"
+                sala_cond: "Condiciones de Alquiler:", sala_cond_text: "El costo es de <strong class='text-olive'>15€ por persona</strong>. Al llegar a 20 personas (300€), el precio se bloquea y se vuelve <strong class='text-olive'>fijo en 300€</strong> hasta la capacidad máxima de 60 personas.", sala_feedback: "Total estimado:",
+                // Cookies & Privacy
+                cookie_title: "Tu privacidad es importante", cookie_text: "Utilizamos cookies técnicas para que el sitio funcione y, con tu consentimiento, cookies analíticas y de perfil para mejorar tu experiencia.", cookie_read_more: "Leer Política de Cookies", cookie_btn_personalize: "Personalizar", cookie_btn_reject: "Rechazar Todo", cookie_btn_accept: "Aceptar Todo",
+                cookie_modal_title: "Gestión de Cookies", cookie_modal_desc: "Este panel te permite expresar tus preferencias con respecto a las cookies y tecnologías de rastreo que utilizamos.", cookie_cat_tech: "Cookies Técnicas (Necesarias)", cookie_cat_tech_desc: "Estas cookies son indispensables para el funcionamiento del sitio (ej. sesión, seguridad). No se pueden desactivar.", cookie_cat_ana: "Cookies Analíticas", cookie_cat_ana_desc: "Nos permiten contar las visitas y fuentes de tráfico para medir y mejorar el rendimiento de nuestro sitio.", cookie_cat_mkt: "Cookies de Marketing", cookie_cat_mkt_desc: "Pueden ser establecidas a través de nuestro sitio por nuestros socios para mostrar contenido personalizado.", cookie_btn_save: "Guardar mis elecciones",
+                privacy_content: `<p class="font-bold">Información de conformidad con el Art. 13 del Reglamento UE 2016/679 (GDPR)</p><h4 class="text-lg text-olive font-bold mt-4">1. Responsable del Tratamiento</h4><p>El Responsable del tratamiento es <strong>Agriturismo Bellavista S.r.l.</strong>, con domicilio social en Località Bellavista 1, 58038 Seggiano (GR). IVA 01450190531. Email de contacto: info@agriturismo-bellavista.it.</p><h4 class="text-lg text-olive font-bold mt-4">2. Tipos de Datos Tratados</h4><ul class="list-disc pl-5 space-y-1"><li><strong>Datos de navegación:</strong> cookies, datos de uso.</li><li><strong>Datos proporcionados voluntariamente:</strong> nombre, email, teléfono en formularios de contacto.</li></ul><h4 class="text-lg text-olive font-bold mt-4">3. Finalidad del Tratamiento</h4><p>Los datos se recogen para proporcionar servicios, responder a solicitudes y para estadísticas anónimas.</p><h4 class="text-lg text-olive font-bold mt-4">4. Base Jurídica</h4><p>El tratamiento se basa en el consentimiento del usuario y en la ejecución de medidas precontractuales.</p><h4 class="text-lg text-olive font-bold mt-4">5. Derechos del Interesado</h4><p>El usuario tiene derecho a acceder, rectificar, cancelar y portar sus datos.</p>`
             },
             fr: {
                 nav_home: "Accueil", nav_about: "Qui Sommes-nous", nav_activities: "Activités", nav_apartments: "Appartements", nav_location: "Où Sommes-nous", nav_gallery: "Galerie", nav_contacts: "Contacts", nav_book: "Réserver",
@@ -946,7 +889,11 @@
                 form_name: "Nom et Prénom", form_email: "E-mail", form_act_select: "Quelles activités vous intéressent?", form_participants: "Nombre de Participants", form_message: "Message ou Demandes Spéciales", form_security: "Contrôle de sécurité", form_math: "Combien font 3 + 2?", form_submit: "Envoyer la Demande",
                 dtl_desc: "Description", dtl_amenities: "Services et Confort", dtl_gallery: "Galerie Photos", dtl_click_photo: "Cliquez sur les photos pour agrandir",
                 book_req_title: "Demander un Devis", book_verify: "Vérifier la Disponibilité", book_verify_text: "Réservez directement en ligne pour garantir le meilleur tarif et une disponibilité immédiate.", book_secure: "Paiements sécurisés", book_now: "Réserver Maintenant",
-                sala_cond: "Conditions de Location:", sala_cond_text: "Le coût est de <strong class='text-olive'>15€ par personne</strong>. Une fois atteint le quota de 20 personnes (300€), le prix est bloqué et devient <strong class='text-olive'>fixe à 300€</strong> jusqu'à la capacité maximale de 60 personnes.", sala_feedback: "Total estimé:"
+                sala_cond: "Conditions de Location:", sala_cond_text: "Le coût est de <strong class='text-olive'>15€ par personne</strong>. Une fois atteint le quota de 20 personnes (300€), le prix est bloqué et devient <strong class='text-olive'>fixe à 300€</strong> jusqu'à la capacité maximale de 60 personnes.", sala_feedback: "Total estimé:",
+                // Cookies & Privacy
+                cookie_title: "Votre vie privée est importante", cookie_text: "Nous utilisons des cookies techniques pour faire fonctionner le site et, avec votre consentement, des cookies analytiques et de profilage pour améliorer votre expérience.", cookie_read_more: "Lire la Politique de Cookies", cookie_btn_personalize: "Personnaliser", cookie_btn_reject: "Tout Refuser", cookie_btn_accept: "Tout Accepter",
+                cookie_modal_title: "Gestion des Cookies", cookie_modal_desc: "Ce panneau vous permet d'exprimer vos préférences concernant les cookies et les technologies de suivi que nous utilisons.", cookie_cat_tech: "Cookies Techniques (Nécessaires)", cookie_cat_tech_desc: "Ces cookies sont indispensables au fonctionnement du site (ex. session, sécurité). Ils ne peuvent pas être désactivés.", cookie_cat_ana: "Cookies Analytiques", cookie_cat_ana_desc: "Nous permettent de compter les visites et les sources de trafic pour mesurer et améliorer les performances de notre site.", cookie_cat_mkt: "Cookies Marketing", cookie_cat_mkt_desc: "Peuvent être définis via notre site par nos partenaires pour afficher du contenu personnalisé.", cookie_btn_save: "Enregistrer mes choix",
+                privacy_content: `<p class="font-bold">Information conformément à l'art. 13 du Règlement UE 2016/679 (RGPD)</p><h4 class="text-lg text-olive font-bold mt-4">1. Responsable du Traitement</h4><p>Le Responsable du traitement est <strong>Agriturismo Bellavista S.r.l.</strong>, siège social à Località Bellavista 1, 58038 Seggiano (GR). TVA 01450190531. Email de contact : info@agriturismo-bellavista.it.</p><h4 class="text-lg text-olive font-bold mt-4">2. Types de Données Traitées</h4><ul class="list-disc pl-5 space-y-1"><li><strong>Données de navigation :</strong> cookies, données d'utilisation.</li><li><strong>Données fournies volontairement :</strong> nom, email, téléphone dans les formulaires de contact.</li></ul><h4 class="text-lg text-olive font-bold mt-4">3. Finalité du Traitement</h4><p>Les données sont collectées pour fournir des services, répondre aux demandes et pour des statistiques anonymes.</p><h4 class="text-lg text-olive font-bold mt-4">4. Base Juridique</h4><p>Le traitement est basé sur le consentement de l'utilisateur et l'exécution de mesures précontractuelles.</p><h4 class="text-lg text-olive font-bold mt-4">5. Droits de la Personne Concernée</h4><p>L'utilisateur a le droit d'accéder, de rectifier, d'annuler et de porter ses données.</p>`
             }
         };
 
@@ -1207,7 +1154,7 @@
                 }
             });
 
-            // Update Active Lang Button (For Mobile List)
+            // Update Active Lang Button
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 if(btn.getAttribute('data-lang') === lang) btn.classList.add('active');
                 else btn.classList.remove('active');
@@ -1264,6 +1211,22 @@
         // Initialize Lang
         document.addEventListener('DOMContentLoaded', () => {
             changeLanguage(currentLang);
+            
+            // --- COOKIE LOGIC ---
+            // Controlla se l'utente ha già salvato le preferenze
+            const preferences = localStorage.getItem('cookiePreferences');
+            
+            // Se NON ci sono preferenze, mostra il banner dopo 1 secondo
+            if (!preferences) {
+                setTimeout(() => {
+                    const banner = document.getElementById('cookie-banner');
+                    if (banner) banner.classList.remove('hidden');
+                }, 1000);
+            } else {
+                // Altrimenti carica le preferenze (log solo per debug)
+                const prefs = JSON.parse(preferences);
+                console.log("Cookie preferences loaded:", prefs);
+            }
         });
 
         // --- RENDER FUNCTIONS ---
