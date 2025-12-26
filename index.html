@@ -181,20 +181,23 @@
             display: block;
         }
 
-        /* Dintorni Marquee Animation */
+        /* Dintorni Scroll Settings */
         .marquee-container {
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            overflow-x: auto; /* Abilita scroll manuale */
+            scrollbar-width: none; /* Nasconde scrollbar Firefox */
+            -ms-overflow-style: none; /* Nasconde scrollbar IE/Edge */
+            cursor: grab;
+        }
+        .marquee-container::-webkit-scrollbar {
+            display: none; /* Nasconde scrollbar Chrome/Safari */
+        }
+        .marquee-container:active {
+            cursor: grabbing;
         }
         .marquee-content {
-            animation: marquee 60s linear infinite;
-        }
-        .marquee-content:hover {
-            animation-play-state: paused;
-        }
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            width: max-content; /* Assicura che il contenuto stia su una riga */
         }
     </style>
 </head>
@@ -443,7 +446,7 @@
             </div>
 
             <!-- Marquee Container -->
-            <div class="marquee-container w-full relative">
+            <div id="dintorni-scroll-container" class="marquee-container w-full relative">
                 <div id="dintorni-marquee" class="marquee-content flex gap-6 py-4 pl-4">
                     <!-- Javascript will inject cards here (doubled for infinite loop) -->
                 </div>
@@ -1411,6 +1414,9 @@
             const fullList = [...dintorniData, ...dintorniData];
             
             marquee.innerHTML = fullList.map((item, i) => createCard(item, i % dintorniData.length)).join('');
+            
+            // Avvia lo scroll automatico JS
+            startDintorniScroll();
         }
 
         // --- CORE FUNCTIONS (Updated for Translation) ---
@@ -1783,6 +1789,49 @@
             desktopNavLinks.forEach(link => { link.classList.remove('text-terra'); if (link.getAttribute('data-target') === current) { link.classList.add('text-terra'); } });
             const galleryBtn = document.getElementById('nav-gallery'); if(galleryBtn) galleryBtn.classList.remove('text-terra');
         });
+
+        // --- DINTORNI SCROLL LOGIC ---
+        let dintorniAnimFrame;
+        function startDintorniScroll() {
+            const container = document.getElementById('dintorni-scroll-container');
+            if (!container) return;
+
+            // Ferma eventuali loop precedenti per evitare conflitti
+            if (dintorniAnimFrame) cancelAnimationFrame(dintorniAnimFrame);
+
+            let speed = 0.5; // Velocità aumentata (puoi modificarla: 1 = normale, 2 = veloce)
+            let isHovered = false;
+            let isTouching = false;
+
+            function step() {
+                const halfWidth = container.scrollWidth / 2;
+
+                if (!isHovered && !isTouching) {
+                    container.scrollLeft += speed;
+                    
+                    // Loop infinito: se arriva a metà (fine della prima lista), resetta a 0
+                    if (container.scrollLeft >= halfWidth) {
+                        container.scrollLeft = 0;
+                    }
+                } else {
+                    // Gestione loop infinito manuale (bidirezionale)
+                    if (container.scrollLeft <= 0) {
+                        container.scrollLeft = halfWidth;
+                    } else if (container.scrollLeft >= halfWidth) {
+                        container.scrollLeft = 0;
+                    }
+                }
+                dintorniAnimFrame = requestAnimationFrame(step);
+            }
+            
+            dintorniAnimFrame = requestAnimationFrame(step);
+            
+            // Event Listeners per fermare lo scroll all'interazione
+            container.addEventListener('mouseenter', () => isHovered = true);
+            container.addEventListener('mouseleave', () => isHovered = false);
+            container.addEventListener('touchstart', () => isTouching = true, {passive: true});
+            container.addEventListener('touchend', () => isTouching = false, {passive: true});
+        }
         
         window.onclick = function(event) { if (event.target.classList.contains('modal-bg') || event.target.id === 'lightbox-modal') { if (event.target.id === 'lightbox-modal') { closeLightbox(); } else { event.target.classList.add('hidden'); document.body.style.overflow = 'auto'; } } }
     </script>
