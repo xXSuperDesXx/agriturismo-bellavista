@@ -180,6 +180,22 @@
         .checkbox-wrapper input:checked + div svg {
             display: block;
         }
+
+        /* Dintorni Marquee Animation */
+        .marquee-container {
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        .marquee-content {
+            animation: marquee 60s linear infinite;
+        }
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
     </style>
 </head>
 <body class="bg-cream text-gray-700 font-sans antialiased">
@@ -199,7 +215,7 @@
                     <a href="javascript:showMainAndScroll('chi-siamo')" data-target="chi-siamo" data-i18n="nav_about" class="desktop-nav-link nav-link hover:text-terra transition-colors uppercase text-sm tracking-widest font-semibold">Chi Siamo</a>
                     <a href="javascript:showMainAndScroll('attivita')" id="nav-attivita" data-target="attivita" data-i18n="nav_activities" class="desktop-nav-link nav-link hover:text-terra transition-colors uppercase text-sm tracking-widest font-semibold">Attività</a>
                     <a href="javascript:showMainAndScroll('appartamenti')" data-target="appartamenti" data-i18n="nav_apartments" class="desktop-nav-link nav-link hover:text-terra transition-colors uppercase text-sm tracking-widest font-semibold">Appartamenti</a>
-                    <a href="javascript:showMainAndScroll('dove-siamo')" data-target="dove-siamo" data-i18n="nav_location" class="desktop-nav-link nav-link hover:text-terra transition-colors uppercase text-sm tracking-widest font-semibold">Dove Siamo</a>
+                    <a href="javascript:showMainAndScroll('dintorni')" data-target="dove-siamo" data-i18n="nav_location" class="desktop-nav-link nav-link hover:text-terra transition-colors uppercase text-sm tracking-widest font-semibold">Dove Siamo</a>
                     <a href="javascript:showGallery()" id="nav-gallery" data-i18n="nav_gallery" class="desktop-nav-link nav-link hover:text-terra transition-colors uppercase text-sm tracking-widest font-semibold">Galleria</a>
                 </nav>
                 
@@ -250,7 +266,7 @@
         <a href="javascript:showMainAndScroll('chi-siamo')" data-i18n="nav_about" class="text-2xl font-serif text-olive hover:text-terra mobile-link">Chi Siamo</a>
         <a href="javascript:showMainAndScroll('attivita')" data-i18n="nav_activities" class="text-3xl font-serif text-terra font-bold mobile-link">Attività</a>
         <a href="javascript:showMainAndScroll('appartamenti')" data-i18n="nav_apartments" class="text-2xl font-serif text-olive hover:text-terra mobile-link">Appartamenti</a>
-        <a href="javascript:showMainAndScroll('dove-siamo')" data-i18n="nav_location" class="text-2xl font-serif text-olive hover:text-terra mobile-link">Dove Siamo</a>
+        <a href="javascript:showMainAndScroll('dintorni')" data-i18n="nav_location" class="text-2xl font-serif text-olive hover:text-terra mobile-link">Dove Siamo</a>
         <a href="javascript:showGallery()" data-i18n="nav_gallery" class="text-2xl font-serif text-olive hover:text-terra mobile-link">Galleria</a>
         <a href="javascript:showMainAndScroll('contatti')" data-i18n="nav_contacts" class="text-2xl font-serif text-olive hover:text-terra mobile-link">Contatti</a>
         
@@ -412,6 +428,24 @@
                         <p class="font-bold text-gray-700">5.0 / 5.0</p>
                         <p class="text-xs text-gray-400 mt-1">Superhost</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DINTORNI SECTION -->
+        <section id="dintorni" class="py-20 bg-white overflow-hidden">
+            <div class="container mx-auto px-6 mb-12 text-center">
+                <span class="text-terra text-sm lg:text-base tracking-widest uppercase font-bold" data-i18n="surr_subtitle">Il Territorio</span>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif text-olive-dark mt-4" data-i18n="surr_title">I Dintorni</h2>
+                <p class="text-gray-500 mt-4 text-lg lg:text-xl max-w-3xl mx-auto" data-i18n="surr_desc">
+                    Il nostro Agriturismo si trova in una posizione strategica per scoprire le meraviglie della Val d'Orcia e del Monte Amiata. Circondato da borghi storici, terme e natura incontaminata a pochi minuti di distanza.
+                </p>
+            </div>
+
+            <!-- Marquee Container -->
+            <div class="marquee-container w-full relative">
+                <div id="dintorni-marquee" class="marquee-content flex gap-6 py-4 pl-4">
+                    <!-- Javascript will inject cards here (doubled for infinite loop) -->
                 </div>
             </div>
         </section>
@@ -778,6 +812,8 @@
                 act_view_title: "Le Nostre Attività", act_view_subtitle: "Esperienze uniche a contatto con la natura",
                 form_act_subtitle: "Prenota la tua esperienza", form_act_title: "Richiedi Informazioni",
                 form_name: "Nome e Cognome", form_email: "E-mail", form_act_select: "Quali attività ti interessano?", form_participants: "Numero Partecipanti", form_message: "Messaggio o Richieste Particolari", form_security: "Controllo di sicurezza", form_math: "Quanto fa 3 + 2?", form_submit: "Invia Richiesta",
+                surr_subtitle: "Il Territorio", surr_title: "I Dintorni", surr_desc: "Posizione strategica per scoprire le meraviglie della Val d'Orcia e del Monte Amiata. Borghi storici, terme e natura incontaminata a pochi minuti da noi.",
+                
                 dtl_desc: "Descrizione", dtl_amenities: "Servizi e Comfort", dtl_gallery: "Galleria Fotografica", dtl_click_photo: "Clicca sulle foto per ingrandirle",
                 book_req_title: "Richiedi Preventivo", book_verify: "Verifica Disponibilità", book_verify_text: "Prenota direttamente online per assicurarti la migliore tariffa garantita e disponibilità immediata.", book_secure: "Pagamenti sicuri", book_now: "Prenota Ora",
                 sala_cond: "Condizioni di Affitto:", sala_cond_text: "Il costo è di <strong class='text-olive'>15€ a persona</strong>. Raggiunta la quota di 20 persone (300€), il prezzo si blocca e diventa <strong class='text-olive'>fisso a 300€</strong> fino alla capienza massima di 60 persone.", sala_feedback: "Totale stimato:",
@@ -806,6 +842,7 @@
                 act_view_title: "Our Activities", act_view_subtitle: "Unique experiences in contact with nature",
                 form_act_subtitle: "Book your experience", form_act_title: "Request Information",
                 form_name: "Name and Surname", form_email: "E-mail", form_act_select: "Which activities interest you?", form_participants: "Number of Participants", form_message: "Message or Special Requests", form_security: "Security Check", form_math: "What is 3 + 2?", form_submit: "Send Request",
+                surr_subtitle: "The Territory", surr_title: "Surroundings", surr_desc: "Strategic location to discover the wonders of Val d'Orcia and Mount Amiata. Historic villages, thermal baths, and unspoiled nature just a few minutes away from us.",
                 dtl_desc: "Description", dtl_amenities: "Amenities & Comfort", dtl_gallery: "Photo Gallery", dtl_click_photo: "Click photos to enlarge",
                 book_req_title: "Request Quote", book_verify: "Check Availability", book_verify_text: "Book directly online to ensure the best guaranteed rate and immediate availability.", book_secure: "Secure payments", book_now: "Book Now",
                 sala_cond: "Rental Conditions:", sala_cond_text: "The cost is <strong class='text-olive'>15€ per person</strong>. Upon reaching 20 people (300€), the price is locked and becomes <strong class='text-olive'>fixed at 300€</strong> up to the maximum capacity of 60 people.", sala_feedback: "Estimated total:",
@@ -834,6 +871,7 @@
                 act_view_title: "Unsere Aktivitäten", act_view_subtitle: "Einzigartige Erlebnisse in Kontakt mit der Natur",
                 form_act_subtitle: "Buchen Sie Ihr Erlebnis", form_act_title: "Informationen anfordern",
                 form_name: "Vor- und Nachname", form_email: "E-Mail", form_act_select: "Welche Aktivitäten interessieren Sie?", form_participants: "Teilnehmerzahl", form_message: "Nachricht oder besondere Wünsche", form_security: "Sicherheitscheck", form_math: "Wie viel ist 3 + 2?", form_submit: "Anfrage senden",
+                surr_subtitle: "Das Gebiet", surr_title: "Die Umgebung", surr_desc: "Strategische Lage, um die Wunder des Val d'Orcia und des Monte Amiata zu entdecken. Historische Dörfer, Thermalbäder und unberührte Natur nur wenige Minuten von uns entfernt.",
                 dtl_desc: "Beschreibung", dtl_amenities: "Ausstattung & Komfort", dtl_gallery: "Fotogalerie", dtl_click_photo: "Fotos zum Vergrößern anklicken",
                 book_req_title: "Angebot anfordern", book_verify: "Verfügbarkeit prüfen", book_verify_text: "Buchen Sie direkt online, um den besten garantierten Tarif und sofortige Verfügbarkeit zu sichern.", book_secure: "Sichere Zahlungen", book_now: "Jetzt buchen",
                 sala_cond: "Mietbedingungen:", sala_cond_text: "Die Kosten betragen <strong class='text-olive'>15€ pro Person</strong>. Bei Erreichen von 20 Personen (300€) wird der Preis fixiert und beträgt <strong class='text-olive'>pauschal 300€</strong> bis zur maximalen Kapazität von 60 Personen.", sala_feedback: "Geschätzte Summe:",
@@ -862,6 +900,7 @@
                 act_view_title: "Nuestras Actividades", act_view_subtitle: "Experiencias únicas en contacto con la naturaleza",
                 form_act_subtitle: "Reserva tu experiencia", form_act_title: "Solicitar Información",
                 form_name: "Nombre y Apellido", form_email: "Correo electrónico", form_act_select: "¿Qué actividades te interesan?", form_participants: "Número de Participantes", form_message: "Mensaje o Solicitudes Especiales", form_security: "Control de seguridad", form_math: "¿Cuánto es 3 + 2?", form_submit: "Enviar Solicitud",
+                surr_subtitle: "El Territorio", surr_title: "Los Alrededores", surr_desc: "Ubicación estratégica para descubrir las maravillas de la Val d'Orcia y del Monte Amiata. Pueblos históricos, termas y naturaleza incontaminada a pocos minutos de nosotros.",
                 dtl_desc: "Descripción", dtl_amenities: "Servicios y Confort", dtl_gallery: "Galería Fotográfica", dtl_click_photo: "Haz clic en las fotos para ampliar",
                 book_req_title: "Solicitar Presupuesto", book_verify: "Verificar Disponibilidad", book_verify_text: "Reserva directamente online para asegurar la mejor tarifa garantizada y disponibilidad inmediata.", book_secure: "Pagos seguros", book_now: "Reservar Ahora",
                 sala_cond: "Condiciones de Alquiler:", sala_cond_text: "El costo es de <strong class='text-olive'>15€ por persona</strong>. Al llegar a 20 personas (300€), el precio se bloquea y se vuelve <strong class='text-olive'>fijo en 300€</strong> hasta la capacidad máxima de 60 personas.", sala_feedback: "Total estimado:",
@@ -890,6 +929,7 @@
                 act_view_title: "Nos Activités", act_view_subtitle: "Expériences uniques au contact de la nature",
                 form_act_subtitle: "Réservez votre expérience", form_act_title: "Demande d'Information",
                 form_name: "Nom et Prénom", form_email: "E-mail", form_act_select: "Quelles activités vous intéressent?", form_participants: "Nombre de Participants", form_message: "Message ou Demandes Spéciales", form_security: "Contrôle de sécurité", form_math: "Combien font 3 + 2?", form_submit: "Envoyer la Demande",
+                surr_subtitle: "Le Territoire", surr_title: "Les Environs", surr_desc: "Emplacement stratégique per découvrir les merveilles du Val d'Orcia et du Mont Amiata. Villages historiques, thermes et nature préservée à quelques minutes de chez nous.",
                 dtl_desc: "Description", dtl_amenities: "Services et Confort", dtl_gallery: "Galerie Photos", dtl_click_photo: "Cliquez sur les photos pour agrandir",
                 book_req_title: "Demander un Devis", book_verify: "Vérifier la Disponibilité", book_verify_text: "Réservez directement en ligne pour garantir le meilleur tarif et une disponibilité immédiate.", book_secure: "Paiements sécurisés", book_now: "Réserver Maintenant",
                 sala_cond: "Conditions de Location:", sala_cond_text: "Le coût est de <strong class='text-olive'>15€ par personne</strong>. Une fois atteint le quota de 20 personnes (300€), le prix est bloqué et devient <strong class='text-olive'>fixe à 300€</strong> jusqu'à la capacité maximale de 60 personnes.", sala_feedback: "Total estimé:",
@@ -942,7 +982,7 @@
                     "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/interni/bellavista%20(2).jpg?raw=true"
                 ],
                 amenities: { it: ["Terrazza Panoramica", "Piscina", "Wi-Fi", "Barbecue", "Angolo Cottura", "Rilevatore di monossido di carbonio", "Forno", "Frigorifero", "Parcheggio Gratuito", "Area comune esterna"], en: ["Panoramic Terrace", "Swimming Pool", "Wi-Fi", "Barbecue", "Kitchenette", "Carbon monoxide detector", "Oven", "Refrigerator", "Free Parking", "Outdoor common area"], de: ["Panoramaterrasse", "Schwimmbad", "Wi-Fi", "Grill", "Kochnische", "Kohlenmonoxid-Melder", "Backofen", "Kühlschrank", "Kostenloser Parkplatz", "Gemeinschaftsaußenbereich"], es: ["Terraza Panorámica", "Piscina", "Wi-Fi", "Barbacoa", "Zona de cocina", "Detector de monóxido de carbono", "Horno", "Frigorífico", "Aparcamiento gratuito", "Zona común exterior"], fr: ["Terrasse Panoramique", "Piscine", "Wi-Fi", "Barbecue", "Coin cuisine", "Détecteur de monoxyde de carbone", "Four", "Réfrigérateur", "Parking gratuit", "Espace commun extérieur"] },
-                capacity: 4
+                capacity: 3
             },
             'ulivi': {
                 title: { it: "Appartamento Ulivi", en: "Olive Trees Apartment", de: "Olivenbäume Wohnung", es: "Apartamento Olivos", fr: "Appartement Oliviers" },
@@ -964,7 +1004,7 @@
                     "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/interni/ulivi7.jpg?raw=true"
                 ],
                 amenities: { it: ["Piano Terra", "Piscina", "Wi-Fi", "Barbecue", "Angolo Cottura", "Rilevatore di monossido di carbonio", "Forno", "Frigorifero", "Parcheggio Gratuito", "Area comune esterna"], en: ["Ground Floor", "Swimming Pool", "Wi-Fi", "Barbecue", "Kitchenette", "Carbon monoxide detector", "Oven", "Refrigerator", "Free Parking", "Outdoor common area"], de: ["Erdgeschoss", "Schwimmbad", "Wi-Fi", "Grill", "Kochnische", "Kohlenmonoxid-Melder", "Backofen", "Kühlschrank", "Kostenloser Parkplatz", "Gemeinschaftsaußenbereich"], es: ["Planta Baja", "Piscina", "Wi-Fi", "Barbacoa", "Zona de cocina", "Detector de monóxido de carbono", "Horno", "Frigorífico", "Aparcamiento gratuito", "Zona común exterior"], fr: ["Rez-de-chaussée", "Piscine", "Wi-Fi", "Barbecue", "Coin cuisine", "Détecteur de monoxyde de carbone", "Four", "Réfrigérateur", "Parking gratuit", "Espace commun extérieur"] },
-                capacity: 3
+                capacity: 4
             },
             'montagna': {
                 title: { it: "Appartamento Montagna", en: "Mountain View Apartment", de: "Berg Wohnung", es: "Apartamento Montaña", fr: "Appartement Montagne" },
@@ -986,7 +1026,7 @@
                     "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/interni/montagna_7.jpg?raw=true"
                 ],
                 amenities: { it: ["Piano Terra", "Piscina", "Wi-Fi", "Barbecue", "Angolo Cottura", "Rilevatore di monossido di carbonio", "Forno", "Frigorifero", "Parcheggio Gratuito", "Area comune esterna"], en: ["Ground Floor", "Swimming Pool", "Wi-Fi", "Barbecue", "Kitchenette", "Carbon monoxide detector", "Oven", "Refrigerator", "Free Parking", "Outdoor common area"], de: ["Erdgeschoss", "Schwimmbad", "Wi-Fi", "Grill", "Kochnische", "Kohlenmonoxid-Melder", "Backofen", "Kühlschrank", "Kostenloser Parkplatz", "Gemeinschaftsaußenbereich"], es: ["Planta Baja", "Piscina", "Wi-Fi", "Barbacoa", "Zona de cocina", "Detector de monóxido de carbono", "Horno", "Frigorífico", "Aparcamiento gratuito", "Zona común exterior"], fr: ["Rez-de-chaussée", "Piscine", "Wi-Fi", "Barbecue", "Coin cuisine", "Détecteur de monoxyde de carbone", "Four", "Réfrigérateur", "Parking gratuit", "Espace commun extérieur"] },
-                capacity: 2
+                capacity: 4
             },
             'lecci': {
                 title: { it: "Appartamento Lecci", en: "Holm Oaks Apartment", de: "Steineichen Wohnung", es: "Apartamento Encinas", fr: "Appartement Chênes Verts" },
@@ -1132,6 +1172,25 @@
             }
         ];
 
+        // --- DINTORNI DATA ---
+        const dintorniData = [
+            { name: "Montalcino", dist: "17 km", img: "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/esterni/montalcino.jpg?raw=true" },
+            { name: "Castiglione d'Orcia", dist: "9 km", img: "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/esterni/castiglionedorcia.jpg?raw=true" },
+            { name: "Bagni San Filippo", dist: "20 km", img: "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/esterni/bagnovignoni.jpg?raw=true" },
+            { name: "Montepulciano", dist: "36 km", img: "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/esterni/montepulciano.jpg?raw=true" },
+            { name: "Parco faunistico di Monte Labbro", dist: "20 km", img: "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/esterni/parcofaunistico.jpg?raw=true" },
+            { name: "I giardini di Daniele Spoerri", dist: "7 km", img: "https://www.danielspoerri.org/giardino/wp-content/uploads/2019/04/cover_il-giardino-di-daniel-spoerri-seggiano-italy.jpg" },
+            { name: "Pitigliano", dist: "53 km", img: "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/esterni/pitigliano.jpg?raw=true" },
+            { name: "Abbazia di S. Antimo", dist: "7 km", img: "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/esterni/abbaziadisantantimo.jpg?raw=true" },
+            { name: "Bagno Vignoni", dist: "12 km", img: "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/esterni/bagnovignoni.jpg?raw=true" },
+            { name: "Pienza", dist: "30 km", img: "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/esterni/pienza.jpg?raw=true" },
+            { name: "Monte Amiata", dist: "16 km", img: "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/esterni/monteamiata.jpg?raw=true" },
+            { name: "Buddhist centre of Merigard", dist: "20 km", img: "https://www.merigar.it/site/assets/files/1550/20180512-5dm34317.jpg" },
+            { name: "Terme di Saturnia", dist: "30 km", img: "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/esterni/saturnia.jpg?raw=true" },
+            { name: "Sovana", dist: "31 km", img: "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/esterni/sovana.jpg?raw=true" },
+            { name: "Siena", dist: "54 km", img: "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/esterni/siena.jpg?raw=true" }
+        ];
+
         // --- GLOBAL STATE ---
         let currentLang = localStorage.getItem('siteLang') || 'it';
         const mainGalleryImages = [
@@ -1198,6 +1257,7 @@
             // Re-render Dynamic Content
             renderApartmentsHome();
             renderActivitiesHome();
+            renderDintorni();
             // If in activities view, re-render that too
             if(!activitiesView.classList.contains('view-hidden')) {
                 renderActivitiesView();
@@ -1326,6 +1386,31 @@
                 `;
                 grid.appendChild(div);
             });
+        }
+
+        function renderDintorni() {
+            const marquee = document.getElementById('dintorni-marquee');
+            if(!marquee) return;
+            marquee.innerHTML = '';
+
+            // Helper to create card HTML
+            const createCard = (item, index) => `
+                <div class="dintorni-card w-[300px] flex-shrink-0 bg-white rounded-sm shadow-lg overflow-hidden group cursor-pointer border border-gray-100" onclick="openDintorniLightbox(${index})">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+                    </div>
+                    <div class="p-4 text-center">
+                        <h4 class="font-serif text-xl text-olive-dark font-bold">${item.name}</h4>
+                        <p class="text-terra font-bold text-sm mt-1">${item.dist}</p>
+                    </div>
+                </div>
+            `;
+
+            // Duplicate list for infinite scroll
+            const fullList = [...dintorniData, ...dintorniData];
+            
+            marquee.innerHTML = fullList.map((item, i) => createCard(item, i % dintorniData.length)).join('');
         }
 
         // --- CORE FUNCTIONS (Updated for Translation) ---
@@ -1488,6 +1573,11 @@
         function openActivityLightbox(activityIndex, imageIndex) {
             currentApartmentImages = activitiesPageData[activityIndex].images;
             openLightbox(imageIndex);
+        }
+
+        function openDintorniLightbox(index) {
+            currentApartmentImages = dintorniData.map(d => d.img);
+            openLightbox(index);
         }
 
         function sendSalaRequest(event) {
@@ -1680,10 +1770,16 @@
             if (!activitiesView.classList.contains('view-hidden')) { desktopNavLinks.forEach(link => link.classList.remove('text-terra')); const actBtn = document.getElementById('nav-attivita'); if(actBtn) actBtn.classList.add('text-terra'); return; }
             if (mainView.classList.contains('view-hidden')) return;
             
-            const sections = ['home', 'chi-siamo', 'attivita', 'appartamenti', 'dove-siamo'];
+            const sections = ['home', 'chi-siamo', 'attivita', 'appartamenti', 'dintorni', 'dove-siamo'];
             let current = '';
             sections.forEach(sectionId => { const section = document.getElementById(sectionId); if (section) { const sectionTop = section.offsetTop; if (window.scrollY >= (sectionTop - 150)) { current = sectionId; } } });
             if ((window.innerHeight + Math.round(window.scrollY)) >= document.body.scrollHeight - 50) { current = 'dove-siamo'; }
+            
+            // Logic to keep "Dove Siamo" active even if we are in "Dintorni"
+            if (current === 'dintorni') {
+                current = 'dove-siamo';
+            }
+
             desktopNavLinks.forEach(link => { link.classList.remove('text-terra'); if (link.getAttribute('data-target') === current) { link.classList.add('text-terra'); } });
             const galleryBtn = document.getElementById('nav-gallery'); if(galleryBtn) galleryBtn.classList.remove('text-terra');
         });
