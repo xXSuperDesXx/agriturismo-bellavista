@@ -1048,7 +1048,6 @@
                     "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/interni/lecci_5.jpg?raw=true",
                     "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/interni/lecci_6.jpg?raw=true",
                     "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/interni/lecci_7.jpg?raw=true",
-                    "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/interni/lecci_8.jpg?raw=true",
                     "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/interni/lecci_9.jpg?raw=true",
                     "https://github.com/xXSuperDesXx/agriturismo-bellavista/blob/main/immagini/interni/lecci_10.jpg?raw=true"
                 ],
@@ -1312,6 +1311,25 @@
                 const prefs = JSON.parse(preferences);
                 console.log("Cookie preferences loaded:", prefs);
             }
+
+            // --- HISTORY STATE INITIALIZATION ---
+            // Imposta lo stato iniziale per la home page se non esiste
+            if (!history.state) {
+                history.replaceState({ view: 'main' }, "", window.location.pathname);
+            }
+        });
+
+        // --- HISTORY POPSTATE LISTENER (Gestione tasto Indietro) ---
+        window.addEventListener('popstate', (event) => {
+            if (event.state) {
+                const view = event.state.view;
+                if (view === 'detail') openApartment(event.state.id, false);
+                else if (view === 'activities') showActivities(false);
+                else if (view === 'gallery') showGallery(false);
+                else if (view === 'main') showMain(false);
+            } else {
+                showMain(false);
+            }
         });
 
         // --- RENDER FUNCTIONS ---
@@ -1433,9 +1451,14 @@
             feedback.innerText = translations[currentLang].sala_feedback + " " + price + "€";
         }
 
-        function openApartment(id) {
+        function openApartment(id, pushToHistory = true) {
             const data = apartmentsData[id];
             if(!data) return;
+            
+            if (pushToHistory) {
+                history.pushState({ view: 'detail', id: id }, "", "#apartment-" + id);
+            }
+
             currentApartmentImages = data.images;
             document.getElementById('detail-title').innerText = data.title[currentLang];
             
@@ -1502,7 +1525,13 @@
             window.dispatchEvent(new Event('scroll'));
         }
 
-        function showActivities() {
+        function showActivities(pushToHistory = true) {
+            // Se chiamato da un evento onclick, pushToHistory sarà l'evento, quindi forziamo true
+            if (typeof pushToHistory !== 'boolean') pushToHistory = true;
+            if (pushToHistory) {
+                history.pushState({ view: 'activities' }, "", "#activities");
+            }
+
             mainView.classList.add('view-hidden');
             mainView.classList.remove('view-visible');
             detailView.classList.add('view-hidden');
@@ -1623,7 +1652,11 @@
             setTimeout(() => { alert("Client di posta aperto."); form.reset(); }, 500);
         }
 
-        function showMain() {
+        function showMain(pushToHistory = true) {
+            const isMainHidden = mainView.classList.contains('view-hidden');
+            if (pushToHistory && isMainHidden) {
+                history.pushState({ view: 'main' }, "", window.location.pathname);
+            }
             detailView.classList.add('view-hidden'); detailView.classList.remove('view-visible');
             galleryView.classList.add('view-hidden'); galleryView.classList.remove('view-visible');
             activitiesView.classList.add('view-hidden'); activitiesView.classList.remove('view-visible');
@@ -1639,7 +1672,11 @@
             setTimeout(() => { const element = document.getElementById(sectionId); if(element) element.scrollIntoView({behavior: 'smooth'}); }, 100);
         }
 
-        function showGallery() {
+        function showGallery(pushToHistory = true) {
+            if (pushToHistory) {
+                history.pushState({ view: 'gallery' }, "", "#gallery");
+            }
+
             mainView.classList.add('view-hidden'); mainView.classList.remove('view-visible');
             detailView.classList.add('view-hidden'); detailView.classList.remove('view-visible');
             activitiesView.classList.add('view-hidden'); activitiesView.classList.remove('view-visible');
@@ -1835,6 +1872,3 @@
     </script>
 </body>
 </html>
-
-
-
